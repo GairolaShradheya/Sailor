@@ -5,10 +5,30 @@ import { useRef } from "react";
 export default function Home() {
   const ref = useRef("");
   return (
-    <header>
-    <h1>Welcome to Our Marketplace</h1>
+    <button class="btn" onclick="toggleSidebar()">click Sidebar</button>
+    <h1 > Sale Sailor Marketplace</h1>
+    <form action="/search" method="GET">
+      <input type="text" name="query" placeholder="Search...">
+      <button type="submit">Search</button>
+    </form>
+
+
+    
+
+    <!-- Backdrop for sidebar -->
+    <div class="backdrop" onclick="closeSidebar()"></div>
+
+    <nav class="sidebar">
+      <h2>Sidebar</h2>
+      <span class="close-button">&times;</span>
+      <ul>
+        <li><a href="#">Link 1</a></li>
+        <li><a href="#">Link 2</a></li>
+        <li><a href="#">Link 3</a></li>
+      </ul>
+    </nav>
   </header>
-  <nav>
+  <nav class="mnav">
     <ul>
       <li><a href="#">Home</a></li>
       <li><a href="#">Products</a></li>
@@ -16,46 +36,34 @@ export default function Home() {
       <li><a href="#">Contact</a></li>
     </ul>
   </nav>
-  <button onclick="toggleSidebar()">click Sidebar</button>
-  
-  <div class="backdrop" onclick="closeSidebar()"></div>
-
-  <nav class="sidebar">
-    <h2>Sidebar</h2>
-    <span class="close-button">&times;</span>
-    <ul>
-      <li><a href="#">Link 1</a></li>
-      <li><a href="#">Link 2</a></li>
-      <li><a href="#">Link 3</a></li>
-    </ul>
-  </nav>
-  
   <main>
-    <h2>Featured Products</h2>
+    <h2 class="fpo">Featured Products</h2>
     <div class="product-list">
       <div class="product">
-        <img src="product1.jpg" alt="Product 1">
+        <img src="c:\Users\Manisha\Desktop\sale salior\dasg.jpg" alt="Product 1">
         <h3>Product 1</h3>
         <p>Description of Product 1</p>
         <button class="add-to-cart">Add to Cart</button>
       </div>
       <div class="product">
-        <img src="product2.jpg" alt="Product 2">
+        <img src="c:\Users\Manisha\Desktop\sale salior\iasa.webp" alt="Product 2">
         <h3>Product 2</h3>
         <p>Description of Product 2</p>
         <button class="add-to-cart">Add to Cart</button>
       </div>
       <div class="product">
-        <img src="product3.jpg" alt="Product 3">
+        <img src="c:\Users\Manisha\Desktop\sale salior\ecomes.jpeg" alt="Product 3">
         <h3>Product 3</h3>
         <p>Description of Product 3</p>
         <button class="add-to-cart">Add to Cart</button>
       </div>
     </div>
   </main>
+
   <footer>
     &copy; 2024 Online Marketplace
   </footer>
+
   <script>
     function toggleSidebar() {
       const sidebar = document.querySelector('.sidebar');
