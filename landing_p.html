@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover amazing deals on jackets, smartwatches, shoes, and more at Sale Sailor. Your one-stop e-commerce solution.">
+  <title>E-Commerce Landing Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #2e111c, #0056b3);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 0;
+      margin: 10px 0 0;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1em;
+    }
+
+    .hero-section {
+      background: linear-gradient(to right, #2e111c, #0056b3);
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .hero-section h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .hero-section p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    .hero-section button {
+      background-color: #ffcc00;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .hero-section button:hover {
+      background-color: #380844;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .product-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 20px;
+    }
+
+    .product-card {
+      background-color: white;
+      width: 300px;
+      margin: 10px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-card h3 {
+      margin: 15px 0 10px;
+      font-size: 1.5em;
+    }
+
+    .product-card p {
+      margin: 0 15px 15px;
+      font-size: 1em;
+      color: #777;
+    }
+
+    .product-card button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .product-card button:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+
+    footer div a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .hero-section h2 {
+        font-size: 1.5em;
+      }
+      .hero-section p {
+        font-size: 1em;
+      }
+      .product-card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sale Sailor</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="hero-section" id="home">
+    <h2>Welcome to Sale Sailor</h2>
+    <p>Discover the best deals on your favorite products!</p>
+    <button>Shop Now</button>
+  </div>
+
+  <div class="product-section" id="products"></div>
+
+  <footer id="contact">
+    <p>© 2024 Sale Sailor. All Rights Reserved.</p>
+    <div>
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+
+  <script>
+    // Product data
+    const products = [
+      {
+        name: "Stylish Jacket",
+        description: "High-quality jacket to keep you warm.",
+        image: "https://via.placeholder.com/300x200",
+        buttonText: "Buy Now"
+      },
+      {
+        name: "Smartwatch",
+        description: "Track your fitness and stay connected.",
+        image: "https://via.placeholder.com/300x200",
+        buttonText: "Buy Now"
+      },
+      {
+        name: "Running Shoes",
+        description: "Comfortable and stylish running shoes.",
+        image: "https://via.placeholder.com/300x200",
+        buttonText: "Buy Now"
+      }
+    ];
+
+    // Dynamically render product cards
+    const productSection = document.getElementById("products");
+
+    products.forEach(product => {
+      const productCard = document.createElement("div");
+      productCard.className = "product-card";
+
+      productCard.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+        <button>${product.buttonText}</button>
+      `;
+
+      productSection.appendChild(productCard);
+    });
+  </script>
+</body>
+</html>
