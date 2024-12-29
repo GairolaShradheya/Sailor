@@ -5,7 +5,11 @@ This is an E-commerce website
 
 # Home Page
 
-![alt text](public/image-1.png)
+![alt text](public/image-3.png)
+
+# Product Page
+
+![alt text](public/image-2.png)
 
 # Get it in your VS code
 

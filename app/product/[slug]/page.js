@@ -24,7 +24,7 @@ export default async function Page({ params }) {
             <Navbar />
             <div className="flex pt-[11vh] min-h-[100vh] px-3">
                 <div className="flex justify-center w-[40vw] left-0 p-2">
-                    <img className="h-[78vh]" src={`${product.image}`} alt={`${product.title}`} />
+                    <img className="h-[78vh] rounded-2xl" src={`${product.image}`} alt={`${product.title}`} />
                 </div>
                 <div className="relative w-[60vw] flex flex-col gap-3 p-2">
                     <h1 className="font-bold text-2xl pb-5">{product.title}</h1>
