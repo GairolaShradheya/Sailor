@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Detail - E-Commerce</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle, rgb(20, 10, 26) 0%, rgb(34, 0, 61) 100%);
+      color: #333;
+    }
+
+    .order-container {
+      width: 80%;
+      margin: 20px auto;
+      background-color: #F0F8FF;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #4682B4;
+    }
+
+    section {
+      margin-bottom: 20px;
+      background-color: #E6E6FA;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #4682B4;
+      margin-bottom: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+
+    table th, table td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #B0C4DE;
+      color: #333;
+    }
+
+    table td {
+      background-color: #F5F5F5;
+      color: #333;
+    }
+
+    table td:last-child {
+      text-align: right;
+    }
+
+    .order-total th, .order-total td {
+      font-size: 18px;
+      color: #4682B4;
+    }
+
+    .order-total td {
+      font-weight: bold;
+      background-color: #B0C4DE;
+    }
+
+    .order-total th {
+      font-weight: normal;
+      background-color: #E6E6FA;
+    }
+  </style>
+</head>
+<body>
+  <div class="order-container">
+    <header>
+      <h1>Order Detail</h1>
+    </header>
+    
+    <section class="order-summary">
+      <h2>Order Summary</h2>
+      <table>
+        <tr>
+          <th>Order ID:</th>
+          <td>#123456</td>
+        </tr>
+        <tr>
+          <th>Date:</th>
+          <td>December 29, 2024</td>
+        </tr>
+        <tr>
+          <th>Status:</th>
+          <td>Shipped</td>
+        </tr>
+      </table>
+    </section>
+    
+    <section class="billing-address">
+      <h2>Billing Address</h2>
+      <p>kakashi</p>
+      <p>1234 Main Street</p>
+      <p>City, State, ZIP</p>
+      <p>Email: mohit.doe@example.com</p>
+      <p>Phone: +1234567890</p>
+    </section>
+    
+    <section class="items">
+      <h2>Items in Order</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Product 1</td>
+            <td>30.00</td>
+            <td>2</td>
+            <td>60.00</td>
+          </tr>
+          <tr>
+            <td>Product 2</td>
+            <td>20.0</td>
+            <td>1</td>
+            <td>20.0</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    
+    <section class="order-total">
+      <h2>Order Total</h2>
+      <table>
+        <tr>
+          <th>Subtotal:</th>
+          <td>80</td>
+        </tr>
+        <tr>
+          <th>Shipping:</th>
+          <td>5</td>
+        </tr>
+        <tr>
+          <th>Total:</th>
+          <td>85</td>
+        </tr>
+      </table>
+    </section>
+  </div>
+</body>
+</html>
