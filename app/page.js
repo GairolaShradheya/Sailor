@@ -1,13 +1,9 @@
 "use client"
-
+import Link from "next/link";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
 export default function Home() {
-const handleok = async() =>{
-  let data={name: 'sailor',email: 'sailor@me.com',password: 'sailor123'}
-  console.log(data);
-}
 
   return (
     <>
@@ -18,7 +14,7 @@ const handleok = async() =>{
           <p className="text-[20px]">This is a beautiful e-commerce website for all the lovely people.</p>
           <p className="text-[20px]">Have a look at our products.</p>
         </div>
-        <button onClick={()=>{handleok()}} className='border border-white px-4 py-2 rounded-full flex items-center justify-center font-bold text-xl h-16 w-52 text-center bg-purple-700'><span>Get Started</span></button>
+        <Link href={'home'} className='border border-white px-4 py-2 rounded-full flex items-center justify-center font-bold text-xl h-16 w-52 text-center bg-purple-700'><span>Get Started</span></Link>
       </div>
       <Footer/>
     </>

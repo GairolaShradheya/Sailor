@@ -1,12 +1,12 @@
-"use client";
 import "../home/home.css";
 import Link from "next/link";
 import React from "react";
-import data from "../new.json" 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-export default function Page() {
-    const products=data.products
+export default async function Page() {
+    let me = await fetch("https://fakestoreapi.com/products")
+    let res =await me.json()
+    const products= await res
     return (
         <>
             <Navbar/>
@@ -17,13 +17,13 @@ export default function Page() {
                 <button>Shop Now</button>
             </div>
  
-            <div className="product-section" id="products">
+            <div className="product-section pb-[15vh]" id="products">
                 {products.map((product, index) => (
-                    <Link key={index} href={`../product/${product.id}`} className="product-card h-[60vh] p-5">
-                        <img className="h-[50%]" src={product.imgs} alt={product.title} />
-                        <h3 className="text-black h-[20%] overflow-hidden">{product.title}</h3>
-                        <p className="h-[10%]">{product.price}</p>
-                        <button className="h-[10%] rounded-2xl font-bold">BUY NOW</button>
+                    <Link key={index} href={`../product/${product.id}`} className="grid grid-flow-row items-center justify-center product-card p-5">
+                        <img className="h-[50%]" src={product.image} alt={product.title} />
+                        <h3 className="text-black overflow-hidden">{product.title}</h3>
+                        <p>${product.price}</p>
+                        <div className="flex justify-center items-center"><button className="h-[10%] rounded-2xl font-bold">BUY NOW</button></div>
                     </Link>
                 ))}
             </div>
