@@ -15,7 +15,7 @@ function navigation() {
         sethide(!hide)
     }
     return (
-        <div className='fixed p-4 gap-5 flex flex-col justify-around w-[10vw] bottom-0 left-0 '>
+        <div className='fixed p-4 gap-5 flex flex-col justify-around w-[10vw] bottom-[-7px] left-0 '>
             <div ref={ref} className='flex flex-col gap-1 py-2 items-center bg-[#4a4a4a] rounded-3xl'>
                 <Link href='/home'>Home</Link>
                 <div className='border border-gray-500 w-full'></div>

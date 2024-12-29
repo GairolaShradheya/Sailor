@@ -1,278 +1,144 @@
-
 body {
-  font-family: Roboto, sans-serif;
-  background-color: #f5f5f5;
   margin: 0;
-  padding: 0;
-  background-color: rgb(12, 12, 12);
+  font-family: Arial, sans-serif;
+  color: #333;
 }
 
 header {
-  background-color: rgb(56, 65, 61);
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-  /* border: 3px solid black; */
-  border-radius: 10px;
-  box-shadow: 5px 5px 10px rgb(159, 212, 228);
-
-}
-h1{
-text-align: center;
-font-size: 50px;
-text-shadow: 5px 5px 5px black;
-
-}
-form {
-  margin: 10px 0;
-}
-
-form input {
-  padding: 10px;
-  width: 60%;
-  max-width: 400px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 20px 2px 20x  2px rgba(0, 0, 0, 0.1);
-
-}
-
-form button {
-  padding: 10px 20px;
-  border-radius: 5px;
-  background-color: #521;
+  background: linear-gradient(to right, #2e111c, #0056b3);
   color: white;
-  border: none;
-  cursor: pointer;
-  transition: ease;
-}
-
-form button:hover {
-  background-color: #3e8e41;
-
-}
-.btn{
-margin-left: 85%;
-margin-top: -40%;
-border: 2px;
-color: black;
-background-color: white;
-font-size: 15px;
-border-radius: 10px;
-padding: 5px 10px; 
-}
-.mnav{
-  position: relative;
-}
-
-.mnav li :hover{
-  background-color: #e48329;
-  border: 2px solid blanchedalmond;
-  border-radius: 30px;
-  
-
-}
-.mnav ul {
-  list-style: none;
-  position: relative;
-  display: flex;
-  gap: 16%;
-  padding: 10px 0;
-  flex-wrap:wrap ;
-  transition: red 0.3s ease;
-}
-
-.mnav li {
-  margin: 10px;
-  /* border: 2px solid #97e7f1; */
-  border-radius: 10px;
-  /* background-color: #3DD993; */
-}
-
-.mnav a {
-  display: flex;
-  background-color: rgb(39, 35, 35);
-  border-radius:15px ;
-  padding: 20px 25px;
-  letter-spacing: 2px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: #fff;
-  box-shadow: 15px 16px 17px black;
-
-}
-
-.mnav a:hover {
-  color: #f8096c;
-  background-color: #3DD9CB;
-  box-shadow: 0 0 6px  #3DD9CB,
-              0 0 36px  #3DD9CB,
-              0 0 60px  #3DD9CB,
-              0 0 600px  #3DD9CB;
-
-}
-
-.sidebar {
-  position: fixed;
-  top: 0px;
-  right: -100%;
-  width: 300px;
-  height: 100%;
-  background-color: #453549;
-  color: #fff;
-  padding: 20px;
-  overflow-y: auto;
-  transition: right 0.3s ease;
-  z-index: 1001;
-}
-
-.sidebar.active {
-  right: 0;
-}
-
-.sidebar h2 {
-  margin-bottom: 20px;
-}
-
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar ul li {
-  margin: 15px 0;
-  background-color: #f5f5f5;
-}
-
-.sidebar ul li a {
-  font-size: large;
-  color: #0e0d0d;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.sidebar ul li a:hover {
-  color: #ffcc00;
-}
-
-.sidebar .close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-main {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-main h2{
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.product-list {
-  display: flex;
-  flex-wrap: wrap;
-  color:  #fff;
-
-  justify-content: space-around;
-}
-
-.product {
-  flex: 1 1 calc(33.33% - 20px);
-  margin: 10px;
-  padding: 20px;
+  padding:20px 0px;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.product img {
-  width: 26%;
-  height: auto;
+header h1 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+.hero-section {
+  background: linear-gradient(to right, #2e111c, #0056b3);
+  color: white;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.hero-section h2 {
+  font-size: 2em;
   margin-bottom: 10px;
 }
 
-.product h3 {
-  margin: 0;
-  
+.hero-section p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
 }
 
-.product p {
-  margin: 0;
-}
-
-.add-to-cart {
-  background-color: #4CAF50;
-  color: #fff;
+.hero-section button {
+  background-color: #ffcc00;
   border: none;
   padding: 10px 20px;
-  border-radius: 20px;
+  font-size: 1em;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
+.hero-section button:hover {
+  background-color: #380844;
+  color: white;
+  transform: scale(1.05);
+}
 
-.add-to-cart:hover {
-  background-color: #3e8e73;
-  border-radius: 20px;
-  box-shadow: 10px 5px 30px rgb(135, 197, 248);
+.product-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.product-card {
+  background-color: white;
+  width: 300px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-card h3 {
+  margin: 15px 0 10px;
+  font-size: 1.5em;
+}
+
+.product-card p {
+  margin: 0 15px 15px;
+  font-size: 1em;
+  color: #777;
+}
+
+.product-card button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.product-card button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 footer {
   background-color: #333;
-  color: #fff;
+  color: white;
   text-align: center;
-  padding: 10px;
-}
-
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
+  padding: 10px 0;
+  position: relative;
+  bottom: 0;
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-  z-index: 1000;
 }
 
-.backdrop.active {
-  display: block;
+footer div a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
 }
-
 
 @media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
+  .hero-section h2 {
+    font-size: 1.5em;
   }
-
-  .product-list {
-    flex-direction: column;
+  .hero-section p {
+    font-size: 1em;
   }
-
-  .product {
-    flex: 1 1 100%;
+  .product-card {
+    width: 90%;
   }
-
-  form input {
-    width: 100%;
-  }
-
-  form button {
-    width: 100%;
-    margin-top: 10px;
-  }
-}
-
-.fpo{
-  color: #eee0e0;
-  position: relative;
-  text-shadow: 20px 20px 20px rgb(6, 144, 224);
-
 }

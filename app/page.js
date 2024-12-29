@@ -12,7 +12,7 @@ const handleok = async() =>{
   return (
     <>
     <Navbar/>
-      <div className="w-full h-[80vh] flex flex-col p-20 items-center gap-10">
+      <div className="w-full h-[100vh] flex flex-col p-20 items-center justify-center gap-10">
         <div className="text-center">
           <h2 className="text-[80px] pb-4  font-bold">Welcome to Sale<span className="text-violet-500">Sailor</span></h2>
           <p className="text-[20px]">This is a beautiful e-commerce website for all the lovely people.</p>

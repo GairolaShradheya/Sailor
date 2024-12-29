@@ -18,6 +18,7 @@ function page() {
 
   const check = () => {
     if (ref2.current.value == ref3.current.value) {
+      alert("password changes succesfully")
       return true;
     }
     else {
@@ -42,7 +43,7 @@ function page() {
   return (
     <>
       <Navbar />
-      <div className='w-[80vw] h-full mx-auto flex flex-col gap-10 justify-center items-center p-10'>
+      <div className='w-[80vw] h-[100vh] mx-auto flex flex-col gap-10 justify-center items-center p-10'>
         <h2 className='text-5xl font-bold'>Change Password</h2>
         <div className='flex flex-col gap-2'>
           <h2 className='pl-5'>Your email</h2>
