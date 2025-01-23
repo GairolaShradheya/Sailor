@@ -22,7 +22,6 @@ export async function POST(request) {
   const collection = db.collection('documents');
   let data = await request.json()
   const findResult = await collection.insertOne(data[0]);
-  console.log(data);
   return NextResponse.json({ message: 'Hello World' })
 }
 
@@ -33,10 +32,10 @@ export async function PUT(request) {
   const id= new ObjectId(data[0]._id);
 
   try{
-    await collection.updateOne({ _id: id }, { $set: {password:data[0].password} });
+    await collection.replaceOne({ _id: id }, data[1]);
     console.log('updated');
   } catch(error){
-    confirm.error('errrrrroooorrrrrr');
+    console.error(error);
   }
   return NextResponse.json({ message: 'Hello World' })
 }

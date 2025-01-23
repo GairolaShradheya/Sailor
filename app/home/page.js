@@ -1,15 +1,12 @@
 import "../home/home.css";
 import Link from "next/link";
 import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 export default async function Page() {
     let me = await fetch("https://fakestoreapi.com/products")
     let res =await me.json()
-    const products= await res
+    const products= res
     return (
         <>
-            <Navbar/>
             <div className="pt-[10vh] min-h-[100vh]">
             <div className="hero-section" id="home">
                 <h2 className="font-bold">Welcome to Sale Sailor</h2>
@@ -28,8 +25,6 @@ export default async function Page() {
                 ))}
             </div>
             </div>
-
-            <Footer/>
         </>
     );
 }

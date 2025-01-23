@@ -1,8 +1,11 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import AllSession from "./components/session";
 import Navbar from "./components/Navbar";
+import MyProvider from "./components/provider";
 import Footer from "./components/Footer";
-import Navigation from "./components/navigation";
+
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,19 +24,25 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased w-[100vw] overflow-x-hidden relative`}
       >
+        <MyProvider>
+        <AllSession>
+        <Navbar/>
         <div className="relative w-full bg-slate-950 text-white">
           <div className="absolute bottom-0 left-[-20%] right-0 z-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]">
           </div>
           {children}
-          <Navigation/>
           <div className="absolute bottom-0 right-[-20%] z-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]">
           </div>
         </div>
+        <Footer/>
+        </AllSession>
+        </MyProvider>
       </body>
     </html>
   );

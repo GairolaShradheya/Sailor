@@ -1,17 +1,23 @@
 "use client"
 import Link from 'next/link'
 import React from 'react'
-import { useState, useRef } from 'react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import { useState, useRef, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { sign_In } from '@/app/redux/custom_session'
+import { signIn } from 'next-auth/react'
+import { redirect } from 'next/navigation'
+
+
 
 function page() {
+
+  const mysession = useSelector((state) => state.mysession.value)
+  const dispatch = useDispatch()
+
   const [check, setcheck] = useState({ email: "", password: "" })
   const ref1 = useRef()
   const ref2 = useRef()
   const ref3 = useRef(false)
-  console.log(ref3);
-
 
   const handleclick = async () => {
     const ans = { email: `${ref1.current.value}`, password: `${ref2.current.value}` }
@@ -21,26 +27,33 @@ function page() {
     data.forEach(e => {
       ((e.email == ans.email) & (e.password == ans.password)) && (ref3.current = true);
     });
-    (ref3.current) ? alert("welcome") : alert("email or password is wrong")
+    if (ref3.current) {
+      dispatch(sign_In(ans))
+      
+    }
+    else { alert("email or password is wrong") }
+    ref1.current.value=""
+    ref2.current.value=""
   }
 
   return (
     <>
-      <Navbar />
       <div className='w-[80vw] h-[100vh] mx-auto flex flex-col justify-center gap-10 items-center p-10'>
         <h2 className='text-5xl font-bold'>Login</h2>
         <div className='flex flex-col gap-2'>
           <h2 className='pl-5'>Your email</h2>
-          <input ref={ref1} className='w-[40vw] h-[5vh] rounded-full px-10 py-5 text-black' type="email" name="" id="" placeholder='Enter your email' />
+          <input ref={ref1} className='w-[40vw] h-[5vh] rounded-full px-10 py-5 text-black' type="email" name="" id="email" placeholder='Enter your email' />
         </div>
         <div className='flex flex-col gap-2'>
           <h2 className='pl-5'>Password</h2>
-          <input ref={ref2} className='w-[40vw] h-[5vh] rounded-full px-10 py-5 text-black' type="password" name="" id="" placeholder='Enter your password' />
+          <input ref={ref2} className='w-[40vw] h-[5vh] rounded-full px-10 py-5 text-black' type="password" name="" id="password" placeholder='Enter your password' />
           <Link href={"/forgot"} className='hover:text-blue-400 underline pl-5 cursor-pointer w-fit'>Forgot Password?</Link>
         </div>
         <button onClick={() => { handleclick() }} className='border border-white px-4 py-2 rounded-full flex w-[100px] items-center bg-purple-700'><span className='mx-auto'>Login</span></button>
+        <div>
+          <button onClick={() => { signIn('github') }} className='border border-white shadow-violet-400 shadow-lg px-3 py-1 rounded-lg bg-slate-900'>Login in with Github</button>
+        </div>
       </div>
-      <Footer />
     </>
   )
 }

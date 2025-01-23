@@ -1,8 +1,6 @@
 "use client"
 import { useState, useRef } from 'react'
 import React from 'react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 
 function page() {
 
@@ -13,7 +11,7 @@ function page() {
   const ref3 = useRef()
 
   const postMe = async () => {
-    await fetch('/api/add', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([{ _id: id.current, password: ref3.current.value }]) })
+    await fetch('/api/forget', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([{ _id: id.current, password: ref3.current.value }]) })
   }
 
   const check = () => {
@@ -42,7 +40,6 @@ function page() {
 
   return (
     <>
-      <Navbar />
       <div className='w-[80vw] h-[100vh] mx-auto flex flex-col gap-10 justify-center items-center p-10'>
         <h2 className='text-5xl font-bold'>Change Password</h2>
         <div className='flex flex-col gap-2'>
@@ -59,7 +56,6 @@ function page() {
         </div>
         <button onClick={() => { handleclick() }} className='border border-white px-4 py-2 rounded-full flex w-[200px] items-center bg-purple-700'><span className='mx-auto'>Change Password</span></button>
       </div>
-      <Footer />
     </>
   )
 }
