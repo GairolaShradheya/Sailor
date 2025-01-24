@@ -106,7 +106,7 @@ function Navbar() {
       )}
       {(!user) && (
         <div className='flex gap-2'>
-          <Link href={'/Login'} className='border border-white px-4 py-2 rounded-full flex items-center bg-purple-700'>Log in</Link>
+          <Link href={'/login'} className='border border-white px-4 py-2 rounded-full flex items-center bg-purple-700'>Log in</Link>
           <Link href={'/signup'} className='border border-white px-4 py-2 rounded-full flex items-center bg-purple-700'>Sign Up</Link>
         </div>
       )}
