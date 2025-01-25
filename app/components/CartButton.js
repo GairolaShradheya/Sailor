@@ -14,7 +14,7 @@ function CartButton({ product }) {
     }
     return (
 
-        <button onClick={() => { handleCartClick() }} className="bg-violet-700 rounded-full text-white border focus:font-bold border-white px-4 ">Add To Cart</button>
+        <button onClick={() => { handleCartClick() }} className="bg-violet-700 rounded-full text-white border focus:font-bold border-white px-4 z-50">Add To Cart</button>
 
     )
 }

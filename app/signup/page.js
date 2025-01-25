@@ -73,7 +73,7 @@ function page() {
 
   return (
     <>
-      <div className='md:w-[80vw] min-h-[100vh] mx-auto flex flex-col justify-center gap-10 items-center pb-[10vh] pt-[10vh] z-10'>
+      <div className='w-full md:w-[80vw] min-h-[100vh] mx-auto flex flex-col justify-center gap-10 items-center pb-[10vh] pt-[10vh] z-50'>
         <ToastContainer/>
         <h2 className='text-5xl font-bold'>Sign Up</h2>
         <div className='flex flex-col md:flex-row gap-2'>

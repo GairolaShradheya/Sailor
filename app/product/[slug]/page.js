@@ -8,7 +8,7 @@ export default async function Page({ params }) {
 
     return (
         <>
-            <div className="flex flex-col md:flex-row pt-[11vh] min-h-[100vh] px-3">
+            <div className="flex flex-col md:flex-row pt-[11vh] w-[100vw] min-h-[100vh] px-3 z-50">
                 <div className="flex justify-center md:w-[40vw] left-0 p-2">
                     <img className="md:h-[78vh] rounded-2xl" src={`${product.image}`} alt={`${product.title}`} />
                 </div>

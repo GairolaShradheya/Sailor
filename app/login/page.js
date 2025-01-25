@@ -40,7 +40,7 @@ function page() {
 
   return (
     <>
-      <div className='w-[100vw] md:w-[80vw] h-[100vh] mx-auto flex flex-col md:justify-center gap-10 items-center pt-[10vh] md:p-10'>
+      <div className='w-[100vw] md:w-[80vw] min-h-[100vh] mx-auto flex flex-col md:justify-center gap-10 items-center pt-[10vh] md:p-10 z-50'>
         <ToastContainer/>
         <h2 className='text-5xl font-bold'>Login</h2>
         <div className='flex flex-col gap-2'>

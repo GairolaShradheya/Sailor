@@ -49,7 +49,7 @@ function Dashboard() {
     // }
 
     return (
-        <div className='ALL flex flex-col gap-5 md:min-h-[100vh] text-white items-center pt-[10vh] pb-[10vh] px-5'>
+        <div className='ALL flex flex-col w-full gap-5 md:min-h-[100vh] text-white items-center pt-[10vh] pb-[10vh] px-5 z-50'>
             <ToastContainer />
             <div className='text-center'>
                 <h1 className='text-4xl font-bold'>Dashboard</h1>
