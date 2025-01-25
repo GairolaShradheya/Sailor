@@ -9,20 +9,15 @@ function page() {
     }, [user])
     
     const products = user.cart
-    console.log(user.cart);
-    products.map((item) => {
-        console.log(item);
-    })
-    
     return (
-        <div className='min-h-screen px-[20vh] w-full pt-[10vh] pb-[8vh]'>
-            {products.map((item) => {
+        <div className='min-h-screen md:px-[20vh] w-full pt-[10vh] pb-[8vh]'>
+            {(products)&&(products.map((item) => {
                 return (
                     <div key={item.id} className='flex flex-col gap-2 w-full h-full'>
                         <div className='w-full h-[1px] bg-gray-200'></div>
-                        <div className='flex w-full p-8'>
-                            <img className='w-[40%] rounded-xl' src={item.image} alt='photo'></img>
-                            <div className='flex flex-col p-8 w-[50%]'>
+                        <div className='flex flex-col md:flex-row w-full p-8'>
+                            <img className='md:w-[40%] rounded-xl' src={item.image} alt='photo'></img>
+                            <div className='flex flex-col p-8 md:w-[50%]'>
                                 <h3 className="text-white block overflow-hidden font-bold text-2xl">{item.title}</h3>
                                 <p className='block'>Price: ${item.price}</p>
                                 <div>About: {item.description}</div>
@@ -30,7 +25,10 @@ function page() {
                             </div>
                         </div>
                     </div>)
-            })}
+            }))}
+            {(!products)&&(
+                <div className='w-full text-center font-bold text-3xl pt-5'>Your Cart is empty</div>
+            )}
         </div>
     )
 }

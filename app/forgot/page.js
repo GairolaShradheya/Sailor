@@ -1,6 +1,7 @@
 "use client"
 import { useState, useRef } from 'react'
 import React from 'react'
+import { ToastContainer, toast } from 'react-toastify';
 
 function page() {
 
@@ -10,17 +11,19 @@ function page() {
   const ref2 = useRef()
   const ref3 = useRef()
 
+  const notify = (data) => toast(`${data}`);
+
   const postMe = async () => {
     await fetch('/api/forget', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([{ _id: id.current, password: ref3.current.value }]) })
   }
 
   const check = () => {
     if (ref2.current.value == ref3.current.value) {
-      alert("password changes succesfully")
+      notify("password changes succesfully")
       return true;
     }
     else {
-      alert("password does not match")
+      notify("password does not match")
       return false
     }
   }
@@ -40,19 +43,20 @@ function page() {
 
   return (
     <>
-      <div className='w-[80vw] h-[100vh] mx-auto flex flex-col gap-10 justify-center items-center p-10'>
-        <h2 className='text-5xl font-bold'>Change Password</h2>
+      <div className='md:w-[80vw] min-h-[100vh] mx-auto flex flex-col gap-10 md:justify-center py-[10vh] items-center md:p-10'>
+        <ToastContainer/>
+        <h2 className='text-4xl md:text-5xl font-bold'>Change Password</h2>
         <div className='flex flex-col gap-2'>
-          <h2 className='pl-5'>Your email</h2>
-          <input ref={ref1} className='w-[40vw] h-[5vh] rounded-full px-10 py-5 text-black' type="email" name="email" placeholder='Enter your email' />
+          <h2 className='md:pl-5 text-xl'>Your email</h2>
+          <input ref={ref1} className='md:w-[40vw] h-[5vh] rounded-full px-10 py-5 text-black' type="email" name="email" placeholder='Enter your email' />
         </div>
         <div className='flex flex-col gap-2'>
-          <h2 className='pl-5'>New Password</h2>
-          <input ref={ref2} className='w-[40vw] h-[5vh] rounded-full px-10 py-5 text-black' type="password" name="password" id="" placeholder='Enter new password' />
+          <h2 className='md:pl-5 text-xl'>New Password</h2>
+          <input ref={ref2} className='md:w-[40vw] h-[5vh] rounded-full px-10 py-5 text-black' type="password" name="password" id="" placeholder='Enter new password' />
         </div>
         <div className='flex flex-col gap-2'>
-          <h2 className='pl-5'>Confirm Password</h2>
-          <input ref={ref3} className='w-[40vw] h-[5vh] rounded-full px-10 py-5 text-black' type="password" name="password" id="" placeholder='Confirm password' />
+          <h2 className='md:pl-5 text-xl'>Confirm Password</h2>
+          <input ref={ref3} className='md:w-[40vw] h-[5vh] rounded-full px-10 py-5 text-black' type="password" name="password" id="" placeholder='Confirm password' />
         </div>
         <button onClick={() => { handleclick() }} className='border border-white px-4 py-2 rounded-full flex w-[200px] items-center bg-purple-700'><span className='mx-auto'>Change Password</span></button>
       </div>

@@ -10,6 +10,14 @@ const dbName = 'SignUp';
 
 client.connect()
 
+export async function GET(request) {
+  const db = client.db(dbName);
+  const collection = db.collection('documents');
+  const id= new ObjectId(data[0]);
+  let result = await collection.find({_id:id}).toArray();
+  return NextResponse.json(result);
+}
+
 export async function PUT(request) {
     const db = client.db(dbName);
     const collection = db.collection('documents');
