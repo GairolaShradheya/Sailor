@@ -40,21 +40,21 @@ function page() {
 
   return (
     <>
-      <div className='w-[100vw] md:w-[80vw] min-h-[100vh] mx-auto flex flex-col md:justify-center gap-10 items-center pt-[10vh] md:p-10 z-50'>
+      <div className='w-[100vw] md:w-[80vw] min-h-[100vh] mx-auto flex flex-col md:justify-center gap-10 items-center pt-[10vh] md:p-10'>
         <ToastContainer/>
         <h2 className='text-5xl font-bold'>Login</h2>
         <div className='flex flex-col gap-2'>
           <h2 className='pl-5'>Your email</h2>
-          <input ref={ref1} className='md:w-[40vw] h-[5vh] rounded-full px-10 py-5 text-black' type="email" name="" id="email" placeholder='Enter your email' />
+          <input ref={ref1} className='md:w-[40vw] z-50 h-[5vh] rounded-full px-10 py-5 text-black' type="email" name="" id="email" placeholder='Enter your email' />
         </div>
         <div className='flex flex-col gap-2'>
           <h2 className='pl-5'>Password</h2>
-          <input ref={ref2} className='md:w-[40vw] h-[5vh] rounded-full px-10 py-5 text-black' type="password" name="" id="password" placeholder='Enter your password' />
-          <Link href={"/forgot"} className='hover:text-blue-400 underline pl-5 cursor-pointer w-fit'>Forgot Password?</Link>
+          <input ref={ref2} className='md:w-[40vw] z-50 h-[5vh] rounded-full px-10 py-5 text-black' type="password" name="" id="password" placeholder='Enter your password' />
+          <Link href={"/forgot"} className='hover:text-blue-400 z-50 underline pl-5 cursor-pointer w-fit'>Forgot Password?</Link>
         </div>
-        <button onClick={() => { handleclick() }} className='border border-white px-4 py-2 rounded-full flex w-[100px] items-center bg-purple-700'><span className='mx-auto'>Login</span></button>
+        <button onClick={() => { handleclick() }} className='border z-50 border-white px-4 py-2 rounded-full flex w-[100px] items-center bg-purple-700'><span className='mx-auto'>Login</span></button>
         <div>
-          <button onClick={() => { signIn('github') }} className='border border-white shadow-violet-400 shadow-lg px-3 py-1 rounded-lg bg-slate-900'>Login in with Github</button>
+          <button onClick={() => { signIn('github') }} className='border z-50 border-white shadow-violet-400 shadow-lg px-3 py-1 rounded-lg bg-slate-900'>Login in with Github</button>
         </div>
       </div>
     </>
