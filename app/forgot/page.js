@@ -1,7 +1,9 @@
 "use client"
 import { useState, useRef } from 'react'
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
+import { get_data } from '../redux/mongodata';
 
 function page() {
 
@@ -10,8 +12,10 @@ function page() {
   const ref1 = useRef()
   const ref2 = useRef()
   const ref3 = useRef()
-
+  
   const notify = (data) => toast(`${data}`);
+  let data = useSelector((state) => state.mongodata.value)
+  const dispatch = useDispatch()
 
   const postMe = async () => {
     await fetch('/api/forget', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([{ _id: id.current, password: ref3.current.value }]) })
@@ -29,8 +33,12 @@ function page() {
   }
 
   const handleclick = async () => {
-    let res = await fetch('api/add/')
-    let data = await res.json()
+    if (data == null) {
+      let res = await fetch('api/add/')
+      data = await res.json()
+      console.log('hiiiii');
+      dispatch(get_data(data))
+    }
 
     data.forEach(e => {
       ref1.current.value == e.email && (ref.current = true && (id.current = e._id));
@@ -44,7 +52,7 @@ function page() {
   return (
     <>
       <div className='md:w-[80vw] w-full min-h-[100vh] mx-auto flex flex-col gap-10 md:justify-center py-[10vh] items-center md:p-10 z-50'>
-        <ToastContainer/>
+        <ToastContainer />
         <h2 className='text-4xl md:text-5xl font-bold'>Change Password</h2>
         <div className='flex flex-col gap-2'>
           <h2 className='md:pl-5 text-xl'>Your email</h2>

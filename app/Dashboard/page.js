@@ -17,7 +17,7 @@ function Dashboard() {
     useEffect(() => {
         if (user) {
             setdata([{ _id: user._id }])
-            setform({ email: `${user.email}`, password: `${user.password}`, name: `${user.name}`, sername: `${user.sername}`, number: `${user.number}`, address: `${user.address}`, image: `${user.image}` })
+            setform({ email: `${user.email}`, password: `${user.password}`, name: `${user.name}`, sername: `${user.sername}`, number: `${user.number}`, address: `${user.address}`, image: `${user.image}`, cart: ((user.cart)?user.cart:[]) })
         }
     }, [])
 
@@ -31,7 +31,7 @@ function Dashboard() {
 
     const SaveChanges = async () => {
         setdata([...data, form])
-        setform({ email: `${user.email}`, password: `${user.password}`, name: `${user.name}`, sername: `${user.sername}`, number: `${user.number}`, address: `${user.address}`, image: user.image })
+        setform({ email: `${user.email}`, password: `${user.password}`, name: `${user.name}`, sername: `${user.sername}`, number: `${user.number}`, address: `${user.address}`, image: user.image, cart:`${user.cart}` })
         await fetch('/api/add', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([...data, form]) })
         notify("Data Saved Successfully!")
         const inputs = document.querySelectorAll("input")
@@ -77,11 +77,11 @@ function Dashboard() {
                         </div>
                         {(hide) ? (
                             <div className='flex flex-col gap-5'>
-                                {((user.name)!="undefined") && (<div className='font-bold text-lg font-serif'>Name:- {user.name}</div>)}
-                                {((user.sername)!="undefined") && (<div className='font-bold text-lg font-serif'>Sername:- {user.sername}</div>)}
-                                {((user.number)!="undefined") && (<div className='font-bold text-lg font-serif'>Number:- {user.number}</div>)}
-                                {((user.address)!="undefined") && (<div className='font-bold text-lg font-serif'>Address:- {user.address}</div>)}
-                                <button className='font-bold w-fit text-xl border border-white shadow-violet-400 shadow-lg px-3 py-1 rounded-lg bg-slate-900' onClick={() => { HandleEditClick() }}>Edit profile</button>
+                                {((user.name) && (user.name)!="undefined" && (user.name)!="") && (<div className='font-bold text-lg font-serif'>Name:- {user.name}</div>)}
+                                {((user.sername) && (user.sername)!="undefined" && (user.sername)!="") && (<div className='font-bold text-lg font-serif'>Sername:- {user.sername}</div>)}
+                                {((user.number) && (user.number)!="undefined" && (user.number)!="") && (<div className='font-bold text-lg font-serif'>Number:- {user.number}</div>)}
+                                {((user.address) && (user.address)!="undefined" && (user.address)!="") && (<div className='font-bold text-lg font-serif'>Address:- {user.address}</div>)}
+                                <button className='font-bold w-fit text-xl border border-white shadow-violet-400 shadow-lg px-3 py-1 rounded-lg bg-slate-900 z-50' onClick={() => { HandleEditClick() }}>Edit profile</button>
                             </div>
                         ) :
                             (<div className='FormClass flex flex-col items-start p-5 w-full gap-4 md:gap-2'>

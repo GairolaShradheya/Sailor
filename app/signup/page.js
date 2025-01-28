@@ -4,6 +4,8 @@ import { signIn, useSession } from 'next-auth/react'
 import React from 'react'
 import { redirect } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify';
+import { useSelector,useDispatch } from 'react-redux'
+import { get_data } from '../redux/mongodata'
 
 
 function page() {
@@ -13,10 +15,15 @@ function page() {
   const ref4 = useRef(false)
   const { data: session } = useSession()
   const notify = (data) => toast(`${data}`);
+  let data1 = useSelector((state) => state.mongodata.value)
+  const dispatch = useDispatch()
 
  const getdata = async () => {
-  let res = await fetch('/api/add/')
-  let data1 = await res.json()
+  if (data1 == null) {
+    let res = await fetch('api/add/')
+    data1 = await res.json()
+    dispatch(get_data(data1))
+  }
   return data1
  }
   

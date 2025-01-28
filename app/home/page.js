@@ -1,10 +1,12 @@
+'use client'
 import "../home/home.css";
 import Link from "next/link";
 import React from "react";
-export default async function Page() {
-    let me = await fetch("https://fakestoreapi.com/products")
-    let res = await me.json()
-    const products = res
+
+export default function Page() {
+    const products = JSON.parse(localStorage.getItem('products'))
+
+    
     return (
         <>
             <div className="pt-[10vh] w-full min-h-[100vh] z-50">

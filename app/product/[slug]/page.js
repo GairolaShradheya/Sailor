@@ -1,14 +1,22 @@
+'use client'
 import "@/app/home/home.css";
 import React, { use } from "react";
 import CartButton from "@/app/components/CartButton";
-export default async function Page({ params }) {
-    const slug = (await params).slug
-    let me = await fetch(`https://fakestoreapi.com/products/${slug}`)
-    let product = await me.json()
+
+export default  function Page({ params }) {
+    const products = JSON.parse(localStorage.getItem('products'))
+    const slug = React.use(params).slug
+    let product = {}
+
+    for (const item of products) {
+        if (item.id==slug){
+            product=item;
+        }
+    }
 
     return (
         <>
-            <div className="flex flex-col md:flex-row pt-[11vh] w-[100vw] min-h-[100vh] px-3 z-50">
+            {(product!="undefined")?(<div className="flex flex-col md:flex-row pt-[11vh] w-[100vw] min-h-[100vh] px-3 z-50">
                 <div className="flex justify-center md:w-[40vw] left-0 p-2">
                     <img className="md:h-[78vh] rounded-2xl" src={`${product.image}`} alt={`${product.title}`} />
                 </div>
@@ -23,7 +31,9 @@ export default async function Page({ params }) {
                         <CartButton product={product} />
                     </div>
                 </div>
-            </div>
+            </div>):(
+                <div className="w-full text-center text-3xl font-bold">Loading...</div>
+            )}
         </>
     );
 }

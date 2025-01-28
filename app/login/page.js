@@ -7,11 +7,13 @@ import { sign_In } from '@/app/redux/custom_session'
 import { signIn } from 'next-auth/react'
 import { ToastContainer, toast } from 'react-toastify';
 import { redirect } from 'next/navigation'
+import { get_data } from '../redux/mongodata'
 
 
 function page() {
 
   const mysession = useSelector((state) => state.mysession.value)
+  let data = useSelector((state) => state.mongodata.value)
   const dispatch = useDispatch()
   const notify = (data) => toast(`${data}`);
   const [check, setcheck] = useState({ email: "", password: "" })
@@ -22,8 +24,11 @@ function page() {
   const handleclick = async () => {
     const ans = { email: `${ref1.current.value}`, password: `${ref2.current.value}` }
     setcheck(ans)
-    let res = await fetch('api/add/')
-    let data = await res.json()
+    if (data == null) {
+      let res = await fetch('api/add/')
+      data = await res.json()
+      dispatch(get_data(data))
+    }
     data.forEach(e => {
       ((e.email == ans.email) & (e.password == ans.password)) && (ref3.current = true);
     });

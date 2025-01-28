@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 // import mongoose from "mongoose";
 import { ObjectId } from "mongodb";
 
-const url = 'mongodb://localhost:27017/';
+const url = process.env.MONGODB_URL;
 const client = new MongoClient(url);
 
 const dbName = 'SignUp';

@@ -9,9 +9,10 @@ function page() {
     }, [user])
     
     const products = user.cart
+
     return (
         <div className='min-h-screen md:px-[20vh] w-full pt-[10vh] pb-[8vh]'>
-            {(products)&&(products.map((item) => {
+            {(products!="undefined")&&(products.map((item) => {
                 return (
                     <div key={item.id} className='flex flex-col gap-2 w-full h-full'>
                         <div className='w-full h-[1px] bg-gray-200'></div>
@@ -26,7 +27,7 @@ function page() {
                         </div>
                     </div>)
             }))}
-            {(!products)&&(
+            {(products=="undefined")&&(
                 <div className='w-full text-center font-bold text-3xl pt-5'>Your Cart is empty</div>
             )}
         </div>

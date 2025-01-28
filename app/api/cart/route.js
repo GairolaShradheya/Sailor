@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 import { ObjectId } from "mongodb";
 
 
-const url = 'mongodb://localhost:27017';
+const url = process.env.MONGODB_URL;
 const client = new MongoClient(url);
 
 const dbName = 'SignUp';
@@ -22,6 +22,7 @@ export async function PUT(request) {
     const db = client.db(dbName);
     const collection = db.collection('documents');
     let data = await request.json()
+    console.log(data);
     const id= new ObjectId(data[1]);
     const data_id = data[0].id
     const result = await collection.find({_id:id}).toArray()
