@@ -11,6 +11,7 @@ function Navbar() {
   const [hide, sethide] = useState(true)
   const ref3 = useRef(false)
   const mysession = useSelector((state) => state.mysession.value)
+  let refresh_cart = useSelector((state) => state.refresh_cart.value)
   const [user, setuser] = useState({})
   
   const notify = () => toast("Sign Up first!");
@@ -82,11 +83,11 @@ function Navbar() {
 
   useEffect(() => {
     (session) ? check(session.user.email) : setuser(null)
-  }, [hide, session])
+  }, [hide,refresh_cart, session])
 
   useEffect(() => {
     (mysession) && check(mysession.email)
-  }, [hide, mysession])
+  }, [hide,refresh_cart, mysession])
 
   const handleclick = () => {
     sethide(!hide)
@@ -110,7 +111,7 @@ function Navbar() {
       />
       {(user) && (
         <div className='flex gap-[6px] md:gap-5 items-center'>
-          <Link className='invert' href={'/cart'}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+          <Link className='invert hover:scale-110' href={'/cart'}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
             <path d="M8 16L16.7201 15.2733C19.4486 15.046 20.0611 14.45 20.3635 11.7289L21 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             <path d="M6 6H22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             <circle cx="6" cy="20" r="2" stroke="currentColor" strokeWidth="1.5" />
@@ -118,9 +119,9 @@ function Navbar() {
             <path d="M8 20L15 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             <path d="M2 2H2.966C3.91068 2 4.73414 2.62459 4.96326 3.51493L7.93852 15.0765C8.08887 15.6608 7.9602 16.2797 7.58824 16.7616L6.63213 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg></Link>
-          <button onClick={() => { signoutfunc() }} className='border border-white px-2 md:px-4 py-2 rounded-full flex items-center bg-purple-700'>Sign Out</button>
+          <button onClick={() => { signoutfunc() }} className='border hover:scale-105 border-white px-2 md:px-4 py-2 rounded-full flex items-center bg-purple-700'>Sign Out</button>
           <div className='flex flex-col'>
-            <div onClick={() => { handleclick() }} className='flex items-center cursor-pointer'>
+            <div onClick={() => { handleclick() }} className='flex  items-center cursor-pointer'>
               <img src={user.image} alt="profile" className='h-10 w-10 rounded-full' />
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="white" fill="none">
                 <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
@@ -142,8 +143,8 @@ function Navbar() {
       )}
       {(!user) && (
         <div className='flex gap-2'>
-          <Link href={'/login'} className='border border-white px-2 md:px-4 py-2 rounded-full flex items-center bg-purple-700'>Log in</Link>
-          <Link href={'/signup'} className='border border-white px-2 md:px-4 py-2 rounded-full flex items-center bg-purple-700'>Sign Up</Link>
+          <Link href={'/login'} className='border hover:scale-105 border-white px-2 md:px-4 py-2 rounded-full flex items-center bg-purple-700'>Log in</Link>
+          <Link href={'/signup'} className='border hover:scale-105 border-white px-2 md:px-4 py-2 rounded-full flex items-center bg-purple-700'>Sign Up</Link>
         </div>
       )}
     </nav>

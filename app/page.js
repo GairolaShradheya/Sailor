@@ -40,7 +40,7 @@ export default function Home() {
           <p className="md:text-[20px] text-xl">This is a beautiful e-commerce website for all the lovely people.</p>
           <p className="text-[20px]">Have a look at our products.</p>
         </div>
-        <Link href={'home'} className='border border-white px-4 py-2 rounded-full flex items-center justify-center font-bold text-xl h-16 w-52 text-center bg-purple-700'>
+        <Link href={'home'} className='border hover:scale-105 border-white px-4 py-2 rounded-full flex items-center justify-center font-bold text-xl h-16 w-52 text-center bg-purple-700'>
           <span>Get Started</span>
           <div className="invert flex items-center justify-center w-[20%] fill-white">
             <svg className="w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24" color="#000000" fill="none">
@@ -51,7 +51,7 @@ export default function Home() {
         </Link>
         <div className=" flex flex-col w-[90vw] gap-[10vh]">
           <div className="flex md:flex-row flex-col bg-gray-800 md:bg-inherit md:gap-5 rounded-3xl">
-            <Image width={600} height={400} src={"/bg.jpg"} alt="Image" className="md:w-[50%]  rounded-3xl "></Image>
+            <Image width={600} height={400} src={"/bg.jpg"} alt="Image" className="hover:scale-105 md:w-[50%]  rounded-3xl "></Image>
             <div className="text-center font-bold text-3xl flex flex-col justify-center items-center font-sans p-10">
               <div>Get all your favorite stuff at your home without taking any problem.</div>
               <div>All your needs are here.</div>
@@ -62,7 +62,7 @@ export default function Home() {
             <div className="text-center font-bold text-3xl flex flex-col justify-center items-center font-sans p-10">
               All the electronics items are available here.
             </div>
-            <div className="flex md:w-[50%] h-[30vh] md:h-[50vh] bg-white relative rounded-3xl">
+            <div className="flex md:w-[50%] h-[30vh] md:h-[50vh] hover:scale-105 transition-[all 0.4s ease-in-out] bg-white relative rounded-3xl">
               <Image width={600} height={400} src={'/T.V..jpg'} alt="TV photo" className="absolute w-[40%] top-[25%] left-[5%]"></Image>
               <Image width={600} height={400} src={'/T.V.2.jpg'} alt="TV photo2" className="absolute w-[40%] top-[25%] right-[5%]"></Image>
             </div>

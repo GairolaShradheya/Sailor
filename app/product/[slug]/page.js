@@ -20,14 +20,14 @@ export default  function Page({ params }) {
                 <div className="flex justify-center md:w-[40vw] left-0 p-2">
                     <img className="md:h-[78vh] rounded-2xl" src={`${product.image}`} alt={`${product.title}`} />
                 </div>
-                <div className="relative md:w-[60vw] flex flex-col gap-3 p-2 items-center">
-                    <h1 className="font-bold text-2xl pb-5">{product.title}</h1>
-                    <p>Price :- ${product.price}</p>
-                    <p>Category :- {product.category}</p>
-                    <p className="pb-[20vh] md:pb-0">Description :- {product.description}</p>
+                <div className="relative md:w-[60vw] flex flex-col gap-4 p-2 items-center">
+                    <h1 className="font-bold text-5xl py-2">{product.title}</h1>
+                    <p className="text-3xl">Price :- ${product.price}</p>
+                    <p className="text-3xl">Category :- {product.category}</p>
+                    <p className="pb-[20vh] text-2xl md:pb-0">{product.description}</p>
 
                     <div className="absolute bottom-[10vh] w-[100%] flex justify-around md:h-[8vh] h-[5vh] md:py-1">
-                        <button className="bg-violet-700 rounded-full border border-white px-4 ">BUY NOW</button>
+                        <button className="bg-violet-700 hover:scale-105 rounded-full border border-white px-4 ">BUY NOW</button>
                         <CartButton product={product} />
                     </div>
                 </div>

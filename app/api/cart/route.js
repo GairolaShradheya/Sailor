@@ -26,10 +26,6 @@ export async function PUT(request) {
     const id= new ObjectId(data[1]);
     const data_id = data[0].id
     const result = await collection.find({_id:id}).toArray()
-    // if(result[0].cart.includes(data[0])){
-    //   console.log('already exist');
-    // }  
-    // else{
     try{
       await collection.updateOne({ _id: id }, {$push:{cart:data[0]}});
       console.log('updated');
