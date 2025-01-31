@@ -6,7 +6,7 @@ import { refresh_data } from '../redux/refresh_card';
 
 function Dashboard() {
     // const ref1 = useRef([])
-    const [user, setuser] = useState(JSON.parse(localStorage.getItem('user')))
+    const [user, setuser] = useState()
     const [hide, sethide] = useState(true)
     const dispatch = useDispatch()
     const [data, setdata] = useState()
@@ -16,6 +16,10 @@ function Dashboard() {
 
 
     useEffect(() => {
+        if (typeof window !== "undefined") {
+            setuser(JSON.parse(localStorage.getItem('user')))
+          }
+          
         if (user) {
             setdata([{ _id: user._id }])
             setform({ email: `${user.email}`, password: `${user.password}`, name: `${user.name}`, sername: `${user.sername}`, number: `${user.number}`, address: `${user.address}`, image: `${user.image}`, cart: ((user.cart) ? user.cart : []) })
