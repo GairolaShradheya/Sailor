@@ -8,13 +8,13 @@ import { useSelector,useDispatch } from 'react-redux'
 import { get_data } from '../redux/mongodata'
 
 
-function page() {
+function Page() {
   const [data, setdata] = useState([])
   const [form, setform] = useState({ email: "", password: "", name: "", sername: "", number: "", address: "",cart:[] })
   const ref3 = useRef(false)
   const ref4 = useRef(false)
   const { data: session } = useSession()
-  const notify = (data) => toast(`${data}`);
+  const notify = (data) => toast(`${data}`,{closeOnClick:true});
   let data1 = useSelector((state) => state.mongodata.value)
   const dispatch = useDispatch()
 
@@ -123,4 +123,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

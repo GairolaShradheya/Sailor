@@ -1,8 +1,7 @@
 "use client"
 import React, { useEffect } from 'react'
-import Image from 'next/image'
 
-function page() {
+function Page() {
     let user = JSON.parse(localStorage.getItem('user'))
 
     useEffect(() => {
@@ -34,4 +33,4 @@ function page() {
     )
 }
 
-export default page
+export default Page

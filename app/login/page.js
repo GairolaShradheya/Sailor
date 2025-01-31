@@ -10,12 +10,12 @@ import { redirect } from 'next/navigation'
 import { get_data } from '../redux/mongodata'
 
 
-function page() {
+function Page() {
 
   const mysession = useSelector((state) => state.mysession.value)
   let data = useSelector((state) => state.mongodata.value)
   const dispatch = useDispatch()
-  const notify = (data) => toast(`${data}`);
+  const notify = (data) => toast(`${data}`,{closeOnClick:true});
   const [check, setcheck] = useState({ email: "", password: "" })
   const ref1 = useRef()
   const ref2 = useRef()
@@ -66,4 +66,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

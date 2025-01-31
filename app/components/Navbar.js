@@ -14,7 +14,7 @@ function Navbar() {
   let refresh_cart = useSelector((state) => state.refresh_cart.value)
   const [user, setuser] = useState({})
   
-  const notify = () => toast("Sign Up first!");
+  const notify = () => toast("Sign Up first!",{closeOnClick:true});
 
   useEffect(() => {
     // console.log('hi');

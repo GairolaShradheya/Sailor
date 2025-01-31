@@ -11,7 +11,7 @@ function Dashboard() {
     const dispatch = useDispatch()
     const [data, setdata] = useState()
     const [form, setform] = useState()
-    const notify = (data) => toast(`${data}`);
+    const notify = (data) => toast(`${data}`,{closeOnClick:true});
 
 
 

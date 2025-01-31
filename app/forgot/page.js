@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { get_data } from '../redux/mongodata';
 
-function page() {
+function Page() {
 
   const id = useRef()
   const ref = useRef(false)
@@ -13,7 +13,7 @@ function page() {
   const ref2 = useRef()
   const ref3 = useRef()
   
-  const notify = (data) => toast(`${data}`);
+  const notify = (data) => toast(`${data}`,{closeOnClick:true});
   let data = useSelector((state) => state.mongodata.value)
   const dispatch = useDispatch()
 
@@ -72,4 +72,4 @@ function page() {
   )
 }
 
-export default page
+export default Page
