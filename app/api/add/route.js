@@ -20,7 +20,15 @@ export async function GET() {
 export async function POST(request) {
   const db = client.db(dbName);
   const collection = db.collection('documents');
-  let data = await request.json()
+  try {
+    data = await request.json();
+  } catch (error) {
+    return NextResponse.json({ message: 'Invalid JSON' }, { status: 400 });
+  }
+
+  if (!Array.isArray(data) || data.length === 0) {
+    return NextResponse.json({ message: 'Invalid data format' }, { status: 400 });
+  }
   const findResult = await collection.insertOne(data[0]);
   return NextResponse.json({ message: 'Hello World' })
 }
@@ -28,12 +36,19 @@ export async function POST(request) {
 export async function PUT(request) {
   const db = client.db(dbName);
   const collection = db.collection('documents');
-  let data = await request.json()
+  try {
+    data = await request.json();
+  } catch (error) {
+    return NextResponse.json({ message: 'Invalid JSON' }, { status: 400 });
+  }
+
+  if (!Array.isArray(data) || data.length === 0) {
+    return NextResponse.json({ message: 'Invalid data format' }, { status: 400 });
+  }
   const id= new ObjectId(data[0]._id);
 
   try{
     await collection.replaceOne({ _id: id }, data[1]);
-    console.log('updated');
   } catch(error){
     console.error(error);
   }

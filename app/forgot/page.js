@@ -36,7 +36,6 @@ function Page() {
     if (data == null) {
       let res = await fetch('api/add/')
       data = await res.json()
-      console.log('hiiiii');
       dispatch(get_data(data))
     }
 

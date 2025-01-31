@@ -14,7 +14,6 @@ function CartButton({ product }) {
 
 
     const handleCartClick = async () => {
-        console.log(user.cart);
         if (!user.cart) {
             notify("Enter details first")
             setTimeout(() => {
@@ -24,24 +23,19 @@ function CartButton({ product }) {
 
         else {
             if (((user.cart) && ((user.cart).length > 0))) {
-                console.log('iterating');
                 for (const item of user.cart) {
                     if (item.id == product.id) {
                         result.current = false
                     }
                 }
             }
-            console.log(result.current);
             if (user && result.current) {
-                console.log('here');
                 await fetch('/api/cart', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([product, user._id]) })
-                console.log('sended');
                 dispatch(refresh_data())
                 notify('Added to cart successfully!')
             }
             else {
                 notify("Already in cart")
-                console.log("Already in cart")
             }
 
         }

@@ -22,7 +22,6 @@ export async function PUT(request) {
     const db = client.db(dbName);
     const collection = db.collection('documents');
     let data = await request.json()
-    console.log(data);
     const id= new ObjectId(data[1]);
     const data_id = data[0].id
     const result = await collection.find({_id:id}).toArray()

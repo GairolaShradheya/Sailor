@@ -18,7 +18,6 @@ export async function PUT(request) {
   
     try{
       await collection.updateOne({ _id: id }, { $set: {password:data[0].password} });
-      console.log('updated');
     } catch(error){
       confirm.error('errrrrroooorrrrrr');
     }

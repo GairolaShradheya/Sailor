@@ -17,14 +17,10 @@ function Navbar() {
   const notify = () => toast("Sign Up first!",{closeOnClick:true});
 
   useEffect(() => {
-    // console.log('hi');
     const temp_data = JSON.parse(localStorage.getItem('user'));
-    // console.log('temp_data:', temp_data);
     if (temp_data) {
       setuser(temp_data);
-      // console.log('User state set:', temp_data);
       setTimeout(() => {
-        console.log(user);
       }, 6000);
     } else {
       console.log('No user data found in localStorage');
@@ -49,7 +45,6 @@ function Navbar() {
   }
 
   const answer1 = () => {
-    console.log("sign up first");
     notify()
     setTimeout(() => {
       localStorage.setItem('user', null)

@@ -66,7 +66,6 @@ function Page() {
       : (notify("Enter email and password"))
     }
     const inputs = document.querySelectorAll("input")
-    console.log(inputs);
     for (const item of inputs) {
       item.value=""
     }
