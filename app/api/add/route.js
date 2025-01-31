@@ -20,7 +20,7 @@ export async function GET() {
 export async function POST(request) {
   const db = client.db(dbName);
   const collection = db.collection('documents');
-  let data;
+  let data = [];
   try {
     data = await request.json();
   } catch (error) {
@@ -37,7 +37,7 @@ export async function POST(request) {
 export async function PUT(request) {
   const db = client.db(dbName);
   const collection = db.collection('documents');
-  let data;
+  let data = [];
   try {
     data = await request.json();
   } catch (error) {
