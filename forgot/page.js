@@ -15,6 +15,7 @@ function Page() {
   
   const notify = (data) => toast(`${data}`,{closeOnClick:true});
   let data = useSelector((state) => state.mongodata.value)
+  
   const dispatch = useDispatch()
 
   const postMe = async () => {

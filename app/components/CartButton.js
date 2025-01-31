@@ -1,17 +1,23 @@
 "use client"
 import { redirect } from 'next/navigation';
 import React from 'react'
-import { useState, useRef } from 'react'
+import { useState, useRef,useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch } from 'react-redux'
 import { refresh_data } from '../redux/refresh_card';
 
 function CartButton({ product }) {
-    const [user, setuser] = useState(JSON.parse(localStorage.getItem('user')))
+    const [user, setuser] = useState([])
     const result = useRef(true)
     const notify = (data) => toast(`${data}`,{closeOnClick:true});
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setuser(JSON.parse(localStorage.getItem('user')))
+          }
+    }, [])
+    
 
     const handleCartClick = async () => {
         if (!user.cart) {

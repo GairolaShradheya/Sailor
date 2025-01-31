@@ -4,7 +4,10 @@ import React, { use } from "react";
 import CartButton from "@/app/components/CartButton";
 
 export default  function Page({ params }) {
-    const products = JSON.parse(localStorage.getItem('products'))
+    let products = []
+    if (typeof window !== "undefined") {
+        products = JSON.parse(localStorage.getItem('products'))
+      }
     const slug = React.use(params).slug
     let product = {}
 

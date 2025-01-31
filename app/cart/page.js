@@ -1,12 +1,10 @@
 "use client"
 import React, { useEffect } from 'react'
-
 function Page() {
-    let user = JSON.parse(localStorage.getItem('user'))
-
-    useEffect(() => {
-        user = JSON.parse(localStorage.getItem('user'))
-    }, [user])
+    let user = []
+    if (typeof window !== "undefined") {
+        user= (JSON.parse(localStorage.getItem('user')))
+      }
 
     const products = user.cart
 

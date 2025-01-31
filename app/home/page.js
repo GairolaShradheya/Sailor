@@ -4,8 +4,10 @@ import Link from "next/link";
 import React from "react";
 
 export default function Page() {
-    const products = JSON.parse(localStorage.getItem('products'))
-
+    let products = []
+    if (typeof window !== "undefined") {
+        products = JSON.parse(localStorage.getItem('products'))
+      }
     
     return (
         <>

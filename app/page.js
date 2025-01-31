@@ -14,7 +14,9 @@ export default function Home() {
     try {
       let me = await fetch("https://fakestoreapi.com/products")
       let res = await me.json()
-      localStorage.setItem('products', JSON.stringify(res))
+      if (typeof window !== "undefined") {
+        localStorage.setItem('products', JSON.stringify(res))
+      }
     } catch (error) {
       console.log("loading");
     }

@@ -17,7 +17,10 @@ function Navbar() {
   const notify = () => toast("Sign Up first!",{closeOnClick:true});
 
   useEffect(() => {
-    const temp_data = JSON.parse(localStorage.getItem('user'));
+    let temp_data = [];
+    if (typeof window !== "undefined") {
+      temp_data = (JSON.parse(localStorage.getItem('user')))
+    }
     if (temp_data) {
       setuser(temp_data);
       setTimeout(() => {
@@ -36,25 +39,33 @@ function Navbar() {
   const signoutfunc = () => {
     if (session) {
       signOut()
-      localStorage.setItem('user', null)
+      if (typeof window !== "undefined") {
+        localStorage.setItem('user', null)
+      }
     }
     else {
       setuser(null)
-      localStorage.setItem('user', null)
+      if (typeof window !== "undefined") {
+        localStorage.setItem('user', null)
+      }
     }
   }
 
   const answer1 = () => {
     notify()
     setTimeout(() => {
-      localStorage.setItem('user', null)
+      if (typeof window !== "undefined") {
+        localStorage.setItem('user', null)
+      }
       signOut()
     }, 5000);
   }
   const answer2 = (e) => {
     ref3.current = true
-    localStorage.setItem('user', JSON.stringify(e))
-    setuser(JSON.parse(localStorage.getItem('user')))
+    if (typeof window !== "undefined") {
+      localStorage.setItem('user', JSON.stringify(e))
+      setuser(JSON.parse(localStorage.getItem('user')))
+    }
 
   }
 
