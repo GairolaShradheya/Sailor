@@ -18,8 +18,14 @@ export async function GET() {
 }
 
 export async function POST(request) {
-  const db = client.db(dbName);
-  const collection = db.collection('documents');
+  let db;
+  let collection;
+  try{
+    db = client.db(dbName);
+    collection = db.collection('documents');
+  }catch(error){
+    console.log(error)
+  }
   let data = [];
   try {
     data = await request.json();
@@ -35,8 +41,14 @@ export async function POST(request) {
 }
 
 export async function PUT(request) {
-  const db = client.db(dbName);
-  const collection = db.collection('documents');
+  let db;
+  let collection;
+  try{
+    db = client.db(dbName);
+    collection = db.collection('documents');
+  }catch(error){
+    console.log(error)
+  }
   let data = [];
   try {
     data = await request.json();
