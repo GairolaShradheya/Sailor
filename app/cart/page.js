@@ -10,7 +10,7 @@ function Page() {
 
     return (
         <div className='min-h-screen md:px-[20vh] w-full pt-[10vh] pb-[8vh]'>
-            {(products != "undefined") && (products.map((item) => {
+            {(products)&&(products != "undefined") && (products.map((item) => {
                 return (
                     <div key={item.id} className='flex flex-col gap-2 w-full h-full'>
                         <div className='w-full h-[1px] bg-gray-200'></div>
