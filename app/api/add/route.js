@@ -16,7 +16,7 @@ export async function GET() {
   let result;
   try {
     let result1 = await collection.find({}).toArray();
-    if (!result1){
+    if (!result1.isArray()){
       result=[]
     }else{
       result=result1

@@ -13,8 +13,8 @@ function Navbar() {
   const mysession = useSelector((state) => state.mysession.value)
   let refresh_cart = useSelector((state) => state.refresh_cart.value)
   const [user, setuser] = useState({})
-  
-  const notify = () => toast("Sign Up first!",{closeOnClick:true});
+
+  const notify = () => toast("Sign Up first!", { closeOnClick: true });
 
   useEffect(() => {
     let temp_data = [];
@@ -29,12 +29,12 @@ function Navbar() {
       console.log('No user data found in localStorage');
     }
   }, []);
-  
-  
-  
+
+
+
   useEffect(() => {
   }, [user])
-  
+
 
   const signoutfunc = () => {
     if (session) {
@@ -80,29 +80,31 @@ function Navbar() {
   const check = async (compare) => {
     setTimeout(async () => {
       let data1;
-      try{
+      try {
         data1 = await getdata();
-      }catch(error){
+      } catch (error) {
         console.error(error);
       }
-      if (data1==[]){
-        answer2({email: `${compare}`})
+      if (data1 == []) {
+        answer2({ email: `${compare}` })
       }
-      else {(data1.forEach(e => {
-        (e.email == compare) && (answer2(e))
-      })),
-        (!ref3.current) && (answer1());}
+      else {
+        (data1.forEach(e => {
+          (e.email == compare) && (answer2(e))
+        })),
+        (!ref3.current) && (answer1());
+      }
     }, 2000);
   }
 
 
   useEffect(() => {
     (session) ? check(session.user.email) : setuser(null)
-  }, [hide,refresh_cart, session])
+  }, [hide, refresh_cart, session])
 
   useEffect(() => {
     (mysession) && check(mysession.email)
-  }, [hide,refresh_cart, mysession])
+  }, [hide, refresh_cart, mysession])
 
   const handleclick = () => {
     sethide(!hide)
