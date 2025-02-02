@@ -72,13 +72,19 @@ function Navbar() {
   const getdata = async () => {
     let res = await fetch('/api/add/')
     let data1 = await res.json()
+    console.log(data1);
     return data1
   }
 
 
   const check = async (compare) => {
     setTimeout(async () => {
-      let data1 = await getdata();
+      let data1;
+      try{
+        data1 = await getdata();
+      }catch(error){
+        console.error(error);
+      }
       (data1.forEach(e => {
         (e.email == compare) && (answer2(e))
       })),
