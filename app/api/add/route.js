@@ -13,7 +13,18 @@ client.connect()
 export async function GET() {
   const db = client.db(dbName);
   const collection = db.collection('documents');
-  let result = await collection.find({}).toArray();
+  let result;
+  try {
+    let result1 = await collection.find({}).toArray();
+    if (!result1){
+      result=[]
+    }else{
+      result=result1
+    }
+  }catch(error){
+    console.error(error)
+  }
+  console.log(result);
   return NextResponse.json(result);
 }
 

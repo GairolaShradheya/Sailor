@@ -85,10 +85,13 @@ function Navbar() {
       }catch(error){
         console.error(error);
       }
-      (data1.forEach(e => {
+      if (data1==[]){
+        answer2({email: `${compare}`})
+      }
+      else {(data1.forEach(e => {
         (e.email == compare) && (answer2(e))
       })),
-        (!ref3.current) && (answer1());
+        (!ref3.current) && (answer1());}
     }, 2000);
   }
 
