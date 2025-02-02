@@ -11,6 +11,9 @@ This is an E-commerce website
 
 ![alt text](public/image-2.png)
 
+# Demo
+https://salesailor.vercel.app/
+
 # Get it in your VS code
 
 1. Choose a desired folder and initialize git in it by terminal using command:-
