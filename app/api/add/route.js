@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
 import { MongoClient } from "mongodb";
-// import mongoose from "mongoose";
 import { ObjectId } from "mongodb";
 
 const url = process.env.MONGODB_URL;
@@ -16,15 +15,14 @@ export async function GET() {
   let result;
   try {
     let result1 = await collection.find({}).toArray();
-    if (!result1.isArray()){
-      result=[]
+    if (result1==undefined){
+      result=[{}]
     }else{
       result=result1
     }
   }catch(error){
     console.error(error)
   }
-  console.log(result);
   return NextResponse.json(result);
 }
 
@@ -66,10 +64,7 @@ export async function PUT(request) {
   } catch (error) {
     return NextResponse.json({ message: 'Invalid JSON' }, { status: 400 });
   }
-
-  if (!Array.isArray(data) || data.length === 0) {
-    return NextResponse.json({ message: 'Invalid data format' }, { status: 400 });
-  }
+  console.log(data);
   const id= new ObjectId(data[0]._id);
 
   try{

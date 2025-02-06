@@ -49,7 +49,7 @@ function CartButton({ product }) {
     }
     return (
         <div>
-            <ToastContainer/>
+            <ToastContainer position="top-left"/>
             <button onClick={() => { handleCartClick() }} className="bg-violet-700 h-[100%] rounded-full text-white border hover:scale-110 border-white px-4 z-50">Add To Cart</button>
         </div>
     )

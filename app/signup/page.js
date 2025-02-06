@@ -4,29 +4,29 @@ import { signIn, useSession } from 'next-auth/react'
 import React from 'react'
 import { redirect } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify';
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { get_data } from '../redux/mongodata'
 
 
 function Page() {
   const [data, setdata] = useState([])
-  const [form, setform] = useState({ email: "", password: "", name: "", sername: "", number: "", address: "",cart:[] })
+  const [form, setform] = useState({ email: "", password: "", name: "", sername: "", number: "", address: "", cart: [] })
   const ref3 = useRef(false)
   const ref4 = useRef(false)
   const { data: session } = useSession()
-  const notify = (data) => toast(`${data}`,{closeOnClick:true});
+  const notify = (data) => toast(`${data}`, { closeOnClick: true });
   let data1 = useSelector((state) => state.mongodata.value)
   const dispatch = useDispatch()
 
- const getdata = async () => {
-  if (data1 == null) {
-    let res = await fetch('api/add/')
-    data1 = await res.json()
-    dispatch(get_data(data1))
+  const getdata = async () => {
+    if (data1 == null) {
+      let res = await fetch('api/add/')
+      data1 = await res.json()
+      dispatch(get_data(data1))
+    }
+    return data1
   }
-  return data1
- }
-  
+
 
   const handlechange = (e) => {
     let temp = e.target.name
@@ -34,16 +34,24 @@ function Page() {
   }
 
   const post = async () => {
-    (!ref3.current)&&await fetch('/api/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([{ email: `${session.user.email}`, name: `${session.user.name}`, image: `${session.user.image}` }]) })
+    (!ref3.current) && await fetch('/api/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([{ email: `${session.user.email}`, name: `${session.user.name}`, image: `${session.user.image}` }]) })
   }
 
   const check = async () => {
-    let data1 = await getdata()
-    data1.forEach(e => {
-      (e.email == session.user.email) && (ref3.current = true)
-    }),
-    (ref3.current)?notify("already signed up"):post();
-    redirect('/')
+    let data1;
+    try {
+      data1 = await getdata()
+      data1.forEach(e => {
+        (e.email == session.user.email) && (ref3.current = true)
+      })
+    } catch (error) {
+      console.error(error);
+    }
+    console.log(ref3.current);
+    (ref3.current) ? notify("already signed up") : post();
+    setTimeout(() => {
+      redirect('/')
+    }, 5000);
   }
 
   const handleclick = async () => {
@@ -51,36 +59,36 @@ function Page() {
     data1.forEach(e => {
       (e.email == form.email) && (ref4.current = true)
     })
-    if(ref4.current){
+    if (ref4.current) {
       notify("Already signed up! Login now")
       setTimeout(() => {
         redirect('/')
       }, 5000);
     }
-    else{
-    ((form.email != "") && (form.password != "")) ? (
-      setdata([...data, form]),
-      setform({ email: "", password: "", name: "", sername: "", number: "", address: "" }),
-      await fetch('/api/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([...data, form]) }),
-      notify("Completed! You can now login"))
-      : (notify("Enter email and password"))
+    else {
+      ((form.email != "") && (form.password != "")) ? (
+        setdata([...data, form]),
+        setform({ email: "", password: "", name: "", sername: "", number: "", address: "" }),
+        await fetch('/api/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([...data, form]) }),
+        notify("Completed! You can now login"))
+        : (notify("Enter email and password"))
     }
     const inputs = document.querySelectorAll("input")
     for (const item of inputs) {
-      item.value=""
+      item.value = ""
     }
-    }
+  }
 
   useEffect(() => {
-      if (session) {
-        check()
-      }
+    if (session) {
+      check()
+    }
   }, [session])
 
   return (
     <>
       <div className='w-full md:w-[80vw] min-h-[100vh] mx-auto flex flex-col justify-center gap-10 items-center pb-[10vh] pt-[10vh]'>
-        <ToastContainer/>
+        <ToastContainer />
         <h2 className='text-5xl font-bold'>Sign Up</h2>
         <div className='flex flex-col md:flex-row gap-2'>
           <div className='flex flex-col gap-6 items-end'>

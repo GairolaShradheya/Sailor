@@ -72,7 +72,6 @@ function Navbar() {
   const getdata = async () => {
     let res = await fetch('/api/add/')
     let data1 = await res.json()
-    console.log(data1);
     return data1
   }
 

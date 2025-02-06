@@ -9,25 +9,24 @@ function Dashboard() {
     const [user, setuser] = useState()
     const [hide, sethide] = useState(true)
     const dispatch = useDispatch()
-    const [data, setdata] = useState()
+    const [data, setdata] = useState([])
     const [form, setform] = useState()
-    const notify = (data) => toast(`${data}`,{closeOnClick:true});
+    const notify = (data) => toast(`${data}`, { closeOnClick: true });
 
+    useEffect(() => {
+        if (user) {
+            setdata([{ _id: user._id }])
+            setform({ email: `${user.email}`, password: `${user.password}`, name: `${user.name}`, sername: `${user.sername}`, number: `${user.number}`, address: `${user.address}`, image: `${user.image}`, cart: ((user.cart) ? user.cart : []) })
+        }
+    }, [user])
 
 
     useEffect(() => {
         if (typeof window !== "undefined") {
             setuser(JSON.parse(localStorage.getItem('user')))
-          }
-          
-        if (user) {
-            setdata([{ _id: user._id }])
-            setform({ email: `${user.email}`, password: `${user.password}`, name: `${user.name}`, sername: `${user.sername}`, number: `${user.number}`, address: `${user.address}`, image: `${user.image}`, cart: ((user.cart) ? user.cart : []) })
         }
     }, [])
 
-    useEffect(() => {
-    }, [user])
 
 
     const HandleEditClick = () => {
@@ -36,14 +35,16 @@ function Dashboard() {
 
     const SaveChanges = async () => {
         setdata([...data, form])
-        setform({ email: `${user.email}`, password: `${user.password}`, name: `${user.name}`, sername: `${user.sername}`, number: `${user.number}`, address: `${user.address}`, image: user.image, cart: `${user.cart}` })
+        // setform({ email: `${user.email}`, password: `${user.password}`, name: `${user.name}`, sername: `${user.sername}`, number: `${user.number}`, address: `${user.address}`, image: user.image, cart: `${user.cart}` })
+        console.log([...data, form]);
         await fetch('/api/add', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([...data, form]) })
-        notify("Data Saved Successfully!")
         dispatch(refresh_data())
         const inputs = document.querySelectorAll("input")
         for (const item of inputs) {
             item.value = ""
         }
+        notify("Data Saved Successfully!")
+
     }
 
     const handlechange = (e) => {
