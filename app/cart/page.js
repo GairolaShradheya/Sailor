@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
+import Image from "next/image"
 function Page() {
     let user = []
     if (typeof window !== "undefined") {
@@ -8,15 +8,27 @@ function Page() {
 
     const products = user.cart
     let Total_amount = 0;
-    for (const item of user.cart) {
-        Total_amount += item.price;
+    let Length_products = 0;
+
+    try{
+        Length_products = (user.cart).length;
+    }catch(error){
+        console.log('length_item');
+    }
+
+    try{
+        for (const item of products) {
+            Total_amount += item.price;
+        }
+    }catch(error){
+        console.log('amount');
     }
 
     return (
         <div className='min-h-screen md:px-[20vh] w-full pt-[10vh] pb-[8vh]'>
             <div className='text-xl flex justify-around items-center'>
                 <div>
-                    <h1>Total items are {(user.cart).length}</h1>
+                    <h1>Total items are {Length_products}</h1>
                     <h1>Total amount is ${Total_amount}</h1>
                 </div>  
                 <div className='text-black bg-white py-2 rounded-xl font-bold hover:scale-105 cursor-pointer px-4'>
