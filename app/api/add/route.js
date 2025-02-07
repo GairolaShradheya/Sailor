@@ -15,7 +15,7 @@ export async function GET() {
   let result;
   try {
     let result1 = await collection.find({}).toArray();
-    if (result1==undefined){
+    if (result1.startsWith("A")){
       result=[{}]
     }else{
       result=result1

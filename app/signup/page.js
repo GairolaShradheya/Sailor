@@ -41,9 +41,10 @@ function Page() {
     let data1;
     try {
       data1 = await getdata()
-      data1.forEach(e => {
+      console.log(data1);
+      (data1)&&(data1.forEach(e => {
         (e.email == session.user.email) && (ref3.current = true)
-      })
+      }))
     } catch (error) {
       console.error(error);
     }
@@ -123,7 +124,7 @@ function Page() {
         </div>
         <button onClick={() => { handleclick() }} className='z-50 border border-white px-4 py-2 rounded-full flex w-[100px] items-center bg-purple-700'><span className='mx-auto'>Sign Up</span></button>
         <div>
-          <button onClick={() => { signIn('github') }} className='z-50 border border-white shadow-violet-400 shadow-lg px-3 py-1 rounded-lg bg-slate-900'>Sign in with Github</button>
+          <button onClick={() => { signIn() }} className='z-50 border border-white shadow-violet-400 shadow-lg px-3 py-1 rounded-lg bg-slate-900'>Sign in with Github</button>
         </div>
       </div>
     </>
