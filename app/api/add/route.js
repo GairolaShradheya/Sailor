@@ -15,7 +15,7 @@ export async function GET() {
   let result;
   try {
     let result1 = await collection.find({}).toArray();
-    if (result1.startsWith("A")){
+    if (result1==undefined){
       result=[{}]
     }else{
       result=result1
@@ -23,6 +23,7 @@ export async function GET() {
   }catch(error){
     console.error(error)
   }
+  console.log(result);
   return NextResponse.json(result);
 }
 
@@ -41,10 +42,7 @@ export async function POST(request) {
   } catch (error) {
     return NextResponse.json({ message: 'Invalid JSON' }, { status: 400 });
   }
-
-  if (!Array.isArray(data) || data.length === 0) {
-    return NextResponse.json({ message: 'Invalid data format' }, { status: 400 });
-  }
+  console.log(data);
   const findResult = await collection.insertOne(data[0]);
   return NextResponse.json({ message: 'Hello World' })
 }
