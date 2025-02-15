@@ -9,6 +9,7 @@ export default function Home() {
 
   let data = useSelector((state) => state.mongodata.value)
   const dispatch = useDispatch()
+  console.log("hi");
 
   const getdata = async () => {
     try {

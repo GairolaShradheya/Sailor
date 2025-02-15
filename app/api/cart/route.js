@@ -27,7 +27,6 @@ export async function PUT(request) {
     const result = await collection.find({_id:id}).toArray()
     try{
       await collection.updateOne({ _id: id }, {$push:{cart:data[0]}});
-      console.log('updated');
     } catch(error){
       console.error(error);
     }

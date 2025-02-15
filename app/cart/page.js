@@ -1,12 +1,11 @@
 "use client"
-import { useState,useRef } from "react"
+import { useState, useRef } from "react"
 function Page() {
     let user = []
     if (typeof window !== "undefined") {
         user = (JSON.parse(localStorage.getItem('user')))
     }
-    const [form, setform] = useState({name:`${user.name}`,number:`${user.number}`,address:`${user.address}`})
-    const [show, setshow] = useState(0)
+    const [show, setshow] = useState(1)
     const [hide, sethide] = useState(true)
 
 
@@ -17,7 +16,7 @@ function Page() {
     try {
         Length_products = (user.cart).length;
     } catch (error) {
-        console.log('length_item');
+        console.log(error);
     }
 
     try {
@@ -25,15 +24,10 @@ function Page() {
             Total_amount += item.price;
         }
     } catch (error) {
-        console.log('amount');
+        console.log(error);
     }
 
-    const handlechange = (e) => {
-        let temp = e.target.name
-        form[temp] = e.target.value
-    }
-
-    const changeit=(e)=>{
+    const changeit = (e) => {
         setshow(e)
     }
 
@@ -44,7 +38,7 @@ function Page() {
                     <h1>Total items are {Length_products}</h1>
                     <h1>Total amount is ${Total_amount}</h1>
                 </div>
-                {(Length_products!=0)&&(<div onClick={()=>{sethide(!hide)}} className='text-black bg-white py-2 rounded-xl font-bold hover:scale-105 cursor-pointer px-4'>
+                {(Length_products != 0) && (<div onClick={() => { sethide(!hide) }} className='text-black bg-white py-2 rounded-xl font-bold hover:scale-105 cursor-pointer px-4'>
                     Place Order
                 </div>)}
             </div>
@@ -61,55 +55,39 @@ function Page() {
                             </div>
                         </div>
                     </div>)
-            })):(
+            })) : (
                 <div className='w-full text-center font-bold text-3xl pt-5'>Your Cart is empty</div>
             )}
             {(products == "undefined") && (
                 <div className='w-full text-center font-bold text-3xl pt-5'>Your Cart is empty</div>
             )}
-            {((Length_products!=0))&&(<div onClick={()=>{sethide(!hide)}} className='text-black bg-white py-2 rounded-xl font-bold hover:scale-105 cursor-pointer px-4 absolute bottom-[9vh] right-3'>
+            {((Length_products != 0)) && (<div onClick={() => { sethide(!hide) }} className='text-black bg-white py-2 rounded-xl font-bold hover:scale-105 cursor-pointer px-4 absolute bottom-[9vh] right-3'>
                 Place Order
             </div>)}
-            {(!hide)&&(<div className="fixed p-5 bg-white shadow-lg shadow-violet-600 w-[50vw] text-black rounded-2xl h-[70vh] right-[25vw] top-[25vh]">
-                <div className="w-full box-border shadow-lg shadow-gray-600 h-[10%]">
-                    <button onClick={()=> {changeit(0)}} className={`w-1/3 rounded-t-2xl h-full ${(show==0)&&("bg-black text-white")}`}>Details</button>
-                    <button onClick={()=> {changeit(1)}} className={`w-1/3 rounded-t-2xl h-full ${(show==1)&&("bg-gray-500 text-white")}`}>Summary</button>
-                    <button onClick={() =>{changeit(2)}} className={`w-1/3 rounded-t-2xl h-full ${(show==2)&&("bg-violet-400 text-white")}`}>Payment</button>
+            {(!hide) && (<div className="fixed p-5 bg-white shadow-lg shadow-violet-600 w-[50vw] text-black rounded-2xl h-[70vh] right-[25vw] top-[25vh]">
+                <div className="w-full box-border shadow-lg shadow-gray-600 h-[10%] rounded-t-2xl">
+                    <button onClick={() => { changeit(1) }} className={`w-1/2 rounded-t-2xl h-full ${(show == 1) && ("bg-gray-500 text-white")}`}>Summary</button>
+                    <button onClick={() => { changeit(2) }} className={`w-1/2 rounded-t-2xl h-full ${(show == 2) && ("bg-violet-400 text-white")}`}>Payment</button>
                 </div>
-                {(show==0)&&(<div className="h-[80%] flex flex-col justify-center gap-5">
-                    <div className='flex flex-col md:flex-row gap-5 justify-center items-center'>
-                        <h2 className='md:pl-5 text-2xl font-bold'>Your Name :-</h2>
-                        <input onChange={(e) => { handlechange(e) }} className='z-50 md:w-[20vw] h-[5vh] rounded-full px-10 py-5 text-white bg-black' value={form.name} type="text" name="name" placeholder='Enter your name' />
-                    </div>
-                    <div className='flex flex-col md:flex-row gap-5 justify-center items-center'>
-                        <h2 className='md:pl-5 text-2xl font-bold'>Your Mobile No. :-</h2>
-                        <input onChange={(e) => { handlechange(e) }} className='z-50 md:w-[20vw] h-[5vh] rounded-full px-10 py-5 text-white bg-black' value={form.number} type="number" name="number" placeholder='Enter your mobile no.' />
-                    </div>
-                    <div className='flex flex-col md:flex-row gap-5 justify-center items-center'>
-                        <h2 className='md:pl-5 text-2xl font-bold'>Your Address :-</h2>
-                        <input onChange={(e) => { handlechange(e) }} className='z-50 md:w-[20vw] h-[5vh] rounded-full px-10 py-5 text-white bg-black' value={form.address} type="text" name="address" placeholder='Enter your address' />
-                    </div>
-                </div>)}
-                {(show==1)&&( <div className="h-[80%] flex flex-col justify-center gap-5">
+                {(show == 1) && (<div className="h-[80%] flex flex-col justify-center gap-5">
                     <div className='flex flex-col gap-2'>
                         <h1 className='text-2xl font-bold'>Total items are {Length_products}</h1>
                         <h1 className='text-2xl font-bold'>Total amount is ${Total_amount}</h1>
                     </div>
                     <div className='flex flex-col gap-2'>
-                        <h1 className='text-2xl font-bold'>Your Name :- {form.name}</h1>
-                        <h1 className='text-2xl font-bold'>Your Mobile No. :- {form.number}</h1>
-                        <h1 className='text-2xl font-bold'>Your Address :- {form.address}</h1>
+                        <h1 className='text-2xl font-bold'>Your Name :- {user.name}</h1>
+                        <h1 className='text-2xl font-bold'>Your Mobile No. :- {(user.number) ? (user.number) : 'Not given'}</h1>
+                        <h1 className='text-2xl font-bold'>Your Address :- {(user.address) ? (user.address) : 'Not given'}</h1>
                     </div>
                 </div>)}
-                {(show==2)&&(
+                {((show == 2) && (user.number) && (user.address)) && (
                     <div className="h-[80%] flex flex-col justify-center gap-5">
                         the payment details will be here
                     </div>
-                )
-                }
+                )}
                 <div className="w-full flex gap-3 h-[10%]">
-                    <button className="w-[50%] h-full rounded-2xl bg-red-400 font-bold" onClick={()=>{sethide(!hide)}}>Cancel</button>
-                    <button className="w-[50%] h-full rounded-2xl bg-red-400 font-bold" onClick={()=>(changeit(false))}>Continue</button>
+                    <button className="w-[50%] h-full rounded-2xl bg-red-400 font-bold" onClick={() => { sethide(!hide) }}>Cancel</button>
+                    <button className="w-[50%] h-full rounded-2xl bg-red-400 font-bold" onClick={() => (setshow(2))}>Continue</button>
                 </div>
 
             </div>)}

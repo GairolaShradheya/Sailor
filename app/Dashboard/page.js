@@ -16,7 +16,7 @@ function Dashboard() {
     useEffect(() => {
         if (user) {
             setdata([{ _id: user._id }])
-            setform({ email: `${user.email}`, password: `${user.password}`, name: `${user.name}`, sername: `${user.sername}`, number: `${user.number}`, address: `${user.address}`, image: `${user.image}`, cart: ((user.cart) ? user.cart : []) })
+            setform({ email: `${user.email}`, password: `${user.password}`, name: `${user.name}`, sername: `${user.sername}`, number: `${user.number}`, address: `${user.address}`, image: `${user.image}`, cart: ((user.cart)) })
         }
     }, [user])
 
@@ -36,7 +36,6 @@ function Dashboard() {
     const SaveChanges = async () => {
         setdata([...data, form])
         // setform({ email: `${user.email}`, password: `${user.password}`, name: `${user.name}`, sername: `${user.sername}`, number: `${user.number}`, address: `${user.address}`, image: user.image, cart: `${user.cart}` })
-        console.log([...data, form]);
         await fetch('/api/add', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([...data, form]) })
         dispatch(refresh_data())
         const inputs = document.querySelectorAll("input")

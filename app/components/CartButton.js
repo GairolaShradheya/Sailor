@@ -20,14 +20,6 @@ function CartButton({ product }) {
     
 
     const handleCartClick = async () => {
-        if (!user.cart) {
-            notify("Enter details first")
-            setTimeout(() => {
-                redirect("/Dashboard")
-            }, 5000);
-        }
-
-        else {
             if (((user.cart) && ((user.cart).length > 0))) {
                 for (const item of user.cart) {
                     if (item.id == product.id) {
@@ -43,8 +35,6 @@ function CartButton({ product }) {
             else {
                 notify("Already in cart")
             }
-
-        }
 
     }
     return (

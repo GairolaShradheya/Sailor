@@ -23,7 +23,6 @@ export async function GET() {
   }catch(error){
     console.error(error)
   }
-  console.log(result);
   return NextResponse.json(result);
 }
 
@@ -42,7 +41,6 @@ export async function POST(request) {
   } catch (error) {
     return NextResponse.json({ message: 'Invalid JSON' }, { status: 400 });
   }
-  console.log(data);
   const findResult = await collection.insertOne(data[0]);
   return NextResponse.json({ message: 'Hello World' })
 }
@@ -62,7 +60,6 @@ export async function PUT(request) {
   } catch (error) {
     return NextResponse.json({ message: 'Invalid JSON' }, { status: 400 });
   }
-  console.log(data);
   const id= new ObjectId(data[0]._id);
 
   try{

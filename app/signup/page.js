@@ -34,21 +34,19 @@ function Page() {
   }
 
   const post = async () => {
-    (!ref3.current) && await fetch('/api/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([{ email: `${session.user.email}`, name: `${session.user.name}`, image: `${session.user.image}` }]) })
+    (!ref3.current) && await fetch('/api/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([{ email: `${session.user.email}`, name: `${session.user.name}`, image: `${session.user.image}`, cart:[] }]) })
   }
 
   const check = async () => {
     let data1;
     try {
       data1 = await getdata()
-      console.log(data1);
       (data1)&&(data1.forEach(e => {
         (e.email == session.user.email) && (ref3.current = true)
       }))
     } catch (error) {
       console.error(error);
     }
-    console.log(ref3.current);
     (ref3.current) ? notify("already signed up") : post();
     setTimeout(() => {
       redirect('/')
