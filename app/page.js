@@ -5,8 +5,8 @@ import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_data } from "./redux/mongodata";
 import gsap from "gsap";
-import { signIn } from "next-auth/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Loading from "./components/loading";
 
 
 export default function Home() {

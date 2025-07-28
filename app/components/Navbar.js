@@ -13,7 +13,7 @@ function Navbar() {
     console.log(status);
     if (status!="loading" && session) {
       console.log(status);
-      console.log(session.user);
+      console.log("Image",session.user.image);
       setuser(session.user)
     }else{
       console.log(status);
@@ -61,7 +61,7 @@ function Navbar() {
             <button onClick={() => { signOut({callbackUrl:"/"}) }} className='border hover:scale-105 border-white px-2 md:px-4 py-2 rounded-full flex items-center bg-purple-700'>Sign Out</button>
             <div className='flex flex-col'>
               <div onClick={() => { handleclick() }} className='flex  items-center cursor-pointer'>
-                <img src={(user.image)?(user.image):"/Default.jpg"} alt="profile" className='h-10 w-10 rounded-full' />
+                <img src={((user.image).lenght>0)?(user.image):"/Default.jpg"} alt="profile" className='h-10 w-10 rounded-full' />
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="white" fill="none">
                   <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
                   <path d="M16 10.5C16 10.5 13.054 13.5 12 13.5C10.9459 13.5 8 10.5 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
