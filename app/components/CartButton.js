@@ -13,15 +13,12 @@ function CartButton({ product }) {
     const notify = (data) => toast(`${data}`, { closeOnClick: true });
     const dispatch = useDispatch()
 
-    let get_data = async () => {
-        if (session) {
-            let ans = await fetch('/api/data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: session.user.email }) })
-            let res = await ans.json()
-            if (res.success) {
-                setuser(res)
-            }
+    useEffect(() => {
+        if(session){
+            setuser(session.user)
         }
-    }
+    }, [session])
+    
 
     useEffect(() => {
         get_data()
