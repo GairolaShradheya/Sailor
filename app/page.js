@@ -3,10 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_data } from "./redux/mongodata";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Loading from "./components/loading";
 
 
 export default function Home() {
@@ -24,11 +22,6 @@ export default function Home() {
       }
     } catch (error) {
       console.log("loading");
-    }
-    if (data == null) {
-      let res = await fetch('api/add/')
-      data = await res.json()
-      dispatch(get_data(data))
     }
   }
 
