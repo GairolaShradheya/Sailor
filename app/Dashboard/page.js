@@ -3,9 +3,13 @@ import { React, useEffect, useState, useRef } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch } from 'react-redux'
 import { refresh_data } from '../redux/refresh_card';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import { redirect } from 'next/navigation';
 
 function Dashboard() {
     // const ref1 = useRef([])
+    let { data: session,status } = useSession()
     const [user, setuser] = useState()
     const [hide, sethide] = useState(true)
     const dispatch = useDispatch()
@@ -14,19 +18,10 @@ function Dashboard() {
     const notify = (data) => toast(`${data}`, { closeOnClick: true });
 
     useEffect(() => {
-        if (user) {
-            setdata([{ _id: user._id }])
-            setform({ email: `${user.email}`, password: `${user.password}`, name: `${user.name}`, sername: `${user.sername}`, number: `${user.number}`, address: `${user.address}`, image: `${user.image}`, cart: ((user.cart)) })
+        if (session) {
+            setuser(session.user)
         }
-    }, [user])
-
-
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            setuser(JSON.parse(localStorage.getItem('user')))
-        }
-    }, [])
-
+    }, [session])
 
 
     const HandleEditClick = () => {
@@ -54,6 +49,10 @@ function Dashboard() {
     //     form[e.target.name] = e.target.files[0]
     // }
 
+    if(status=="unauthenticated"){
+        redirect("/")
+    }
+
     return (
         <div className='ALL flex flex-col w-full gap-5 min-h-[100vh] text-white items-center pt-[10vh] pb-[10vh] px-5 z-50'>
             <ToastContainer />
@@ -63,10 +62,10 @@ function Dashboard() {
             </div>
             {user && (
                 <div className='flex flex-col md:flex-row gap-5 '>
-                    <div className='First flex flex-col h-[68vh] md:w-[40vw] border border-gray-500 rounded-3xl p-5 items-center gap-5 overflow-x-auto'>
-                        <div className='flex justify-center gap-5 '>
+                    <div className='First flex flex-col h-[68vh] md:w-[40vw] border border-gray-500 rounded-3xl pt-[5%] p-5 gap-6 overflow-x-auto'>
+                        <div className='flex justify-center gap-6 '>
                             <div className='relative'>
-                                <img src={`${user.image}`} alt="profile" className='text-center bg-black md:h-[15vh] rounded-full' />
+                                <Image src={`${(user.image)?(user.image):"/Default.jpg"}`} width={60} height={40} alt="profile" className='text-center bg-black md:scale-150 rounded-full'></Image>
                                 {/* {(!hide)&&(<div onClick={() => { sethide2(!hide2) }} className='size-7 p-1 bg-white flex items-center justify-center rounded-full absolute bottom-0 right-0'>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
                                         <path d="M14.0737 3.88545C14.8189 3.07808 15.1915 2.6744 15.5874 2.43893C16.5427 1.87076 17.7191 1.85309 18.6904 2.39232C19.0929 2.6158 19.4769 3.00812 20.245 3.79276C21.0131 4.5774 21.3972 4.96972 21.6159 5.38093C22.1438 6.37312 22.1265 7.57479 21.5703 8.5507C21.3398 8.95516 20.9446 9.33578 20.1543 10.097L10.7506 19.1543C9.25288 20.5969 8.504 21.3182 7.56806 21.6837C6.63212 22.0493 5.6032 22.0224 3.54536 21.9686L3.26538 21.9613C2.63891 21.9449 2.32567 21.9367 2.14359 21.73C1.9615 21.5234 1.98636 21.2043 2.03608 20.5662L2.06308 20.2197C2.20301 18.4235 2.27297 17.5255 2.62371 16.7182C2.97444 15.9109 3.57944 15.2555 4.78943 13.9445L14.0737 3.88545Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
@@ -82,9 +81,8 @@ function Dashboard() {
 
                         </div>
                         {(hide) ? (
-                            <div className='flex flex-col gap-5'>
+                            <div className='flex flex-col pl-[20%] gap-5'>
                                 {((user.name) && (user.name) != "undefined" && (user.name) != "") && (<div className='font-bold text-lg font-serif'>Name:- {user.name}</div>)}
-                                {((user.sername) && (user.sername) != "undefined" && (user.sername) != "") && (<div className='font-bold text-lg font-serif'>Sername:- {user.sername}</div>)}
                                 {((user.number) && (user.number) != "undefined" && (user.number) != "") && (<div className='font-bold text-lg font-serif'>Number:- {user.number}</div>)}
                                 {((user.address) && (user.address) != "undefined" && (user.address) != "") && (<div className='font-bold text-lg font-serif'>Address:- {user.address}</div>)}
                                 <button className='font-bold hover:scale-105 w-fit text-xl border border-white shadow-violet-400 shadow-lg px-3 py-1 rounded-lg bg-slate-900 z-50' onClick={() => { HandleEditClick() }}>Edit profile</button>

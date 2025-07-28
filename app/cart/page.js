@@ -1,20 +1,26 @@
 "use client"
-import { useState, useRef } from "react"
+import { useSession } from "next-auth/react"
+import { useState, useEffect } from "react"
 function Page() {
-    let user = []
-    if (typeof window !== "undefined") {
-        user = (JSON.parse(localStorage.getItem('user')))
-    }
+    let {data:session}=useSession()
+    const [user, setuser] = useState()
+    const [products, setproducts] = useState([])
+
+    useEffect(() => {
+      if(session){
+        setuser(session.user)
+        setproducts(session.user.cart)
+      }
+    }, [])
+    
     const [show, setshow] = useState(1)
     const [hide, sethide] = useState(true)
 
-
-    const products = user.cart
     let Total_amount = 0;
     let Length_products = 0;
 
     try {
-        Length_products = (user.cart).length;
+        Length_products = products.length;
     } catch (error) {
         console.log(error);
     }

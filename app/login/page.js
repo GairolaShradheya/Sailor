@@ -1,69 +1,78 @@
-"use client"
-import Link from 'next/link'
-import React from 'react'
-import { useState, useRef, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { sign_In } from '@/app/redux/custom_session'
-import { signIn } from 'next-auth/react'
-import { ToastContainer, toast } from 'react-toastify';
+"use client";
+import { signIn } from "next-auth/react";
+import { useState,useEffect } from "react"
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { redirect } from 'next/navigation'
-import { get_data } from '../redux/mongodata'
 
+export default function LoginPage() {
+  let {data:session}=useSession()
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-function Page() {
+  
 
-  const mysession = useSelector((state) => state.mysession.value)
-  let data = useSelector((state) => state.mongodata.value)
-  const dispatch = useDispatch()
-  const notify = (data) => toast(`${data}`,{closeOnClick:true});
-  const [check, setcheck] = useState({ email: "", password: "" })
-  const ref1 = useRef()
-  const ref2 = useRef()
-  const ref3 = useRef(false)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleclick = async () => {
-    const ans = { email: `${ref1.current.value}`, password: `${ref2.current.value}` }
-    setcheck(ans)
-    if (data == null) {
-      let res = await fetch('api/add/')
-      data = await res.json()
-      dispatch(get_data(data))
-    }
-    data.forEach(e => {
-      ((e.email == ans.email) & (e.password == ans.password)) && (ref3.current = true);
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
     });
-    if (ref3.current) {
-      dispatch(sign_In(ans))
-      setTimeout(() => {
-        redirect('/')
-      }, 2000);
+
+    if (result?.ok) {
+      redirect("/"); // Redirect to homepage or dashboard
+    } else {
+      setError("Invalid email or password");
     }
-    else { notify("email or password is wrong") }
-    ref1.current.value = ""
-    ref2.current.value = ""
+    console.log(session);
+  };
+
+  if(session){
+    redirect("/");
   }
 
   return (
-    <>
-      <div className='w-[100vw] md:w-[80vw] min-h-[100vh] mx-auto flex flex-col md:justify-center gap-10 items-center pt-[10vh] md:p-10'>
-        <ToastContainer/>
-        <h2 className='text-5xl font-bold'>Login</h2>
-        <div className='flex flex-col gap-2'>
-          <h2 className='pl-5'>Your email</h2>
-          <input ref={ref1} className='md:w-[40vw] z-50 h-[5vh] rounded-full px-10 py-5 text-black' type="email" name="" id="email" placeholder='Enter your email' />
-        </div>
-        <div className='flex flex-col gap-2'>
-          <h2 className='pl-5'>Password</h2>
-          <input ref={ref2} className='md:w-[40vw] z-50 h-[5vh] rounded-full px-10 py-5 text-black' type="password" name="" id="password" placeholder='Enter your password' />
-          <Link href={"/forgot"} className='hover:text-blue-400 z-50 underline pl-5 cursor-pointer w-fit'>Forgot Password?</Link>
-        </div>
-        <button onClick={() => { handleclick() }} className='border z-50 border-white px-4 py-2 rounded-full flex w-[100px] items-center bg-purple-700'><span className='mx-auto'>Login</span></button>
-        <div>
-          <button onClick={() => { signIn('github') }} className='border z-50 border-white shadow-violet-400 shadow-lg px-3 py-1 rounded-lg bg-slate-900'>Login in with Github</button>
-        </div>
-      </div>
-    </>
-  )
-}
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 text-black">
+      <h2 className="text-2xl font-bold mb-4">Login</h2>
 
-export default Page
+      <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-sm">
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          required
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full border p-2 rounded"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          required
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full border p-2 rounded"
+        />
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        >
+          Login
+        </button>
+      </form>
+
+      <div className="mt-6">
+        <button
+          onClick={() => signIn("github")}
+          className="bg-black text-white p-2 rounded"
+        >
+          Sign in with GitHub
+        </button>
+      </div>
+    </div>
+  );
+}

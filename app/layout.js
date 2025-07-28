@@ -30,15 +30,15 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased w-[100vw] overflow-x-hidden relative bg-slate-950`}
       >
-        <MyProvider>
-          <AllSession>
+        <AllSession>
+          <MyProvider>
             <Navbar />
             <div className="relative w-full  text-white">
               {children}
             </div>
             <Footer />
-          </AllSession>
-        </MyProvider>
+          </MyProvider>
+        </AllSession>
       </body>
     </html>
   );

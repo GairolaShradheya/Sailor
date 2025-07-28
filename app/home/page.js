@@ -2,11 +2,35 @@
 import "../home/home.css";
 import Link from "next/link";
 import React from "react";
+import { useState,useEffect } from "react";
 
 export default function Page() {
-    let products = []
-    if (typeof window !== "undefined") {
-        products = JSON.parse(localStorage.getItem('products'))
+    let [products, setproducts] = useState([])
+    const [allProducts, setallProducts] = useState([])
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            let storedData = JSON.parse(localStorage.getItem('products'))
+            setproducts(storedData);
+            setallProducts(storedData);
+        }    
+    }, [])
+    
+
+    let display=(e)=>{
+        let search = e.target.value.toLowerCase();
+        console.log(search);
+        let tempProduct=[];
+        for (let i = 0; i < allProducts.length; i++) {
+            if (allProducts[i].title.toLowerCase().includes(search)) {
+                tempProduct.push(allProducts[i]);
+            }
+        }
+        console.log(tempProduct);
+        if (tempProduct.length > 0) {
+            setproducts(tempProduct);
+        }else{
+            setproducts([])
+        }
     }
 
 
@@ -22,26 +46,24 @@ export default function Page() {
                                 <path d="M17.5 17.5L22 22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                 <path d="M20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11C2 15.9706 6.02944 20 11 20C15.9706 20 20 15.9706 20 11Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
                             </svg>
-                            <input placeholder="Search here" className="w-[90%] text-black border-white h-full border" name="search"></input>
-                        </div>
-                        <div className="invert cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
-                                <path d="M17.5 17.5L22 22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11C2 15.9706 6.02944 20 11 20C15.9706 20 20 15.9706 20 11Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                            </svg>
+                            <input onInput={(e) => { display(e) }} placeholder="Search here" className="w-[90%] text-black focus:outline-none border-white h-full border" name="search"></input>
                         </div>
                     </div>
                 </div>
 
                 <div className="product-section pb-[15vh]" id="products">
-                    {products.map((product, index) => (
-                        <Link key={index} href={`../product/${product.id}`} className="grid grid-flow-row items-center justify-center product-card p-5">
-                            <img className="h-[50%]" src={product.image} alt={product.title} />
+                    {(products.length>0)?(products.map((product, index) => (
+                        <Link key={index} href={`../product/${index}`} className="grid grid-flow-row items-center justify-center product-card p-5">
+                            <img className="h-[50%] transition-all duration-300 ease-in-out hover:scale-105" src={product.image} alt={product.title} />
                             <h3 className="text-black overflow-hidden">{product.title}</h3>
                             <p>${product.price}</p>
                             <div className="flex justify-center items-center"><button className="h-[10%] rounded-2xl font-bold">BUY NOW</button></div>
                         </Link>
-                    ))}
+                    ))):(
+                        <div className="flex items-center justify-center">
+                            <h1>No product found!</h1>
+                        </div>
+                    )}
                 </div>
             </div>
         </>
