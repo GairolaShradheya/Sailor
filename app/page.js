@@ -33,6 +33,7 @@ export default function Home() {
       {
         ...to,
         ease: "power3.in",
+
         scrollTrigger: {
           trigger: id,
           start: start,
@@ -44,9 +45,9 @@ export default function Home() {
 
   useEffect(() => {
     getdata();
-    featuresAnimation(featuresRef.current, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 1, delay: 0.3 });
-    featuresAnimation(left.current, { x: 2000, opacity: 0 }, { x: 0, opacity: 1, duration: 1, delay: 0.3 });
-    featuresAnimation(".first1", { x: -2000, opacity: 0 }, { x: 0, opacity: 1, duration: 1, delay: 0.3 }, "top 70%");
+    featuresAnimation(".second1", { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 1, delay: 0.3 });
+    featuresAnimation(".second2", { x: 2000, opacity: 0 }, { x: 0, opacity: 1, duration: 1, delay: 0.3 });
+    featuresAnimation(".first1", { x: -2000, opacity: 0}, { x: 0, opacity: 1, duration: 1, delay: 0.3 }, "top 70%");
     featuresAnimation(".first2", { x: 100, opacity: 0 }, { x: 0, opacity: 1, duration: 1, delay: 0.3 }, "top 70%");
     featuresAnimation(".head1", { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.8 });
     featuresAnimation(".head2", { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.3 });
@@ -56,8 +57,7 @@ export default function Home() {
 
 
   return (
-    <>
-      <div className="w-full min-h-[100vh] flex flex-col p-[20vh] items-center gap-20">
+      <div className=" min-h-[100vh] flex flex-col w-[100%] items-center pt-[20vh] p-[2%] gap-10">
         <div className="flex flex-col justify-center items-center h-[60vh] gap-20">
           <div className="text-center ">
             <h2 className="head1 md:text-[80px] text-6xl md:pb-4 pb-10 font-bold">Welcome to Sale<span className="text-violet-500">Sailor</span></h2>
@@ -74,51 +74,50 @@ export default function Home() {
             </div>
           </Link>
         </div>
-        <div className=" flex flex-col w-[90vw] gap-[10vh]">
-          <div className="flex md:flex-row flex-col bg-gray-800 md:bg-inherit md:gap-5 rounded-3xl">
-            <Image ref={featuresRef} width={600} height={400} src={"/bg.jpg"} alt="Image" className="first1 hover:scale-105 md:w-[50%] transition-all duration-500 ease-in-out rounded-3xl "></Image>
+        <div className=" flex flex-col w-[96%] gap-[10vh]">
+          <div className="flex w-full md:flex-row flex-col md:bg-inherit bg-gray-800 h-[93vh] md:h-fit md:gap-5 rounded-3xl overflow-hidden">
+            <Image width={600} height={400} src={"/bg.jpg"} alt="Image" className="first1 hover:scale-105 md:w-[50%] transition-all duration-500 ease-in-out rounded-3xl "></Image>
             <div className="first2 text-center font-bold text-3xl flex flex-col justify-center items-center font-sans p-10">
               <div>Get all your favorite stuff at your home without taking any problem.</div>
               <div>All your needs are here.</div>
               <div>All the benefits at just one click.</div>
             </div>
           </div>
-          <div className="flex md:flex-row flex-col bg-gray-800 md:bg-inherit md:gap-5 rounded-3xl">
-            <div ref={featuresRef} className="text-center font-bold text-3xl flex flex-col justify-center items-center font-sans p-10">
+          <div className="flex md:flex-row flex-col bg-gray-800 md:bg-inherit md:gap-5 h-[60vh] rounded-3xl overflow-hidden">
+            <div className="second1 text-center font-bold text-3xl flex flex-col justify-center items-center font-sans p-10">
               All the electronics items are available here.
             </div>
-            <div ref={left} className="flex md:w-[50%] h-[30vh] md:h-[50vh] transition-all duration-500 ease-in-out hover:scale-105 bg-white relative rounded-3xl">
+            <div className="second2 flex md:w-[50%] h-[30vh] md:h-[50vh] transition-all duration-500 ease-in-out hover:scale-105 bg-white relative rounded-3xl">
               <Image width={600} height={400} src={'/T.V..jpg'} alt="TV photo" className="absolute w-[40%] top-[25%] left-[5%] transition-all duration-500 ease-in-out hover:scale-105"></Image>
               <Image width={600} height={400} src={'/T.V.2.jpg'} alt="TV photo2" className="absolute w-[40%] top-[25%] right-[5%] transition-all duration-500 ease-in-out hover:scale-105"></Image>
             </div>
           </div>
 
         </div>
-      </div>
-      <div className="grid md:grid-cols-4 w-full bg-gray-900 gap-4 md:gap-0 pb-[10vh] pt-[4vh]">
-        <div className="text-center flex flex-col gap-3">
-          <h2 className="font-bold text-2xl">Pages</h2>
-          <Link href={'/home'}>Home</Link>
-        </div>
-        <div className="text-center flex flex-col gap-3">
-          <h2 className="font-bold text-2xl">Message from developer</h2>
-          <p>This website and its data is only developed for getting knowledge, it cannot used for buying products.<span className="block">Have a good day.</span></p>
-        </div>
-        <div className="text-center flex flex-col gap-3">
-          <h2 className="font-bold text-2xl">Contribution</h2>
-          <p>Shradheya Gairola</p>
-          <p>Mohit</p>
-        </div>
-        <div className="text-center flex flex-col gap-3">
-          <h2 className="font-bold text-2xl">Contact us</h2>
-          <div>
-            <div className="font-bold">Github:-</div>
-            <Link href={'https://github.com/GairolaShradheya'} target="_blank" className="hover:underline hover:text-blue-600 block cursor-pointer">GairolaShradheya</Link>
-            <Link href={'https://github.com/mohitji227'} target="_blank" className="hover:underline hover:text-blue-600 block cursor-pointer">mohitji227</Link>
+
+        <div className="grid md:grid-cols-4 w-full bg-gray-900 gap-4 md:gap-0 pb-[10vh] pt-[4vh]">
+          <div className="text-center flex flex-col gap-3">
+            <h2 className="font-bold text-2xl">Pages</h2>
+            <Link href={'/home'}>Home</Link>
+          </div>
+          <div className="text-center flex flex-col gap-3">
+            <h2 className="font-bold text-2xl">Message from developer</h2>
+            <p>This website and its data is only developed for getting knowledge, it cannot used for buying products.<span className="block">Have a good day.</span></p>
+          </div>
+          <div className="text-center flex flex-col gap-3">
+            <h2 className="font-bold text-2xl">Contribution</h2>
+            <p>Shradheya Gairola</p>
+            <p>Mohit</p>
+          </div>
+          <div className="text-center flex flex-col gap-3">
+            <h2 className="font-bold text-2xl">Contact us</h2>
+            <div>
+              <div className="font-bold">Github:-</div>
+              <Link href={'https://github.com/GairolaShradheya'} target="_blank" className="hover:underline hover:text-blue-600 block cursor-pointer">GairolaShradheya</Link>
+              <Link href={'https://github.com/mohitji227'} target="_blank" className="hover:underline hover:text-blue-600 block cursor-pointer">mohitji227</Link>
+            </div>
           </div>
         </div>
       </div>
-
-    </>
   );
 }
