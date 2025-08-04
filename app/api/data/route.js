@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server"
-import { MongoClient } from "mongodb";
-import { ObjectId } from "mongodb";
-
-const url = process.env.MONGODB_URL;
-const client = new MongoClient(url);
+import clientPromise from "@/app/lib/mongoConnect";
 
 const dbName = 'SignUp';
 
-client.connect()
-
 export async function POST(request) {
+  const client = await clientPromise;
   const db = client.db(dbName);
   const collection = db.collection('documents');
   let data = await request.json()
