@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server"
 import clientPromise from "@/app/lib/mongoConnect";
 
-const dbName = 'SignUp';
-
 export async function POST(request) {
   const client = await clientPromise;
-  const db = client.db(dbName);
+  const db = client.db('SignUp');
   const collection = db.collection('documents');
   let data = await request.json()
+  console.log("got the data",data);
   try {
     let result = await collection.findOne(data);
     if (result==undefined){
