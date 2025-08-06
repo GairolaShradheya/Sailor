@@ -16,13 +16,11 @@ if (process.env.NODE_ENV === "development") {
   if (!global) {
     client = new MongoClient(uri);
     global= client.connect();
-    console.log('connected');
   }
   clientPromise = global;
 } else {
   client = new MongoClient(uri);
   clientPromise = client.connect();
-  console.log('connected');
 }
 
 export default clientPromise;

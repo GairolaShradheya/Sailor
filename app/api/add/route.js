@@ -37,6 +37,7 @@ export async function PUT(request) {
   let db =  client.db(dbName);
   let collection= db.collection('documents');
   let data = [];
+  console.log("data is :",data);
   try {
     data = await request.json();
   } catch (error) {
