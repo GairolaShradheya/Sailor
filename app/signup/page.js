@@ -21,28 +21,30 @@ function Page() {
 
   const handleclick = async () => {
     setloading(true)
-    let ans = await fetch('/api/data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: form.email }) })
-    console.log(ans);
-    if (ans.data) {
-      notify("Already signed up! Login now")
-      setloading(false)
-      setTimeout(() => {
-        redirect('/')
-      }, 5000);
+    if ((form.email != "") && (form.password != "")) {
+      setdata([...data, form]);
+      setform({ email: "", password: "", name: "", sername: "", number: "", address: "" });
+      await fetch(
+        '/api/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([...data, form]) }
+      ).then(async (res) => {
+        let dataaa = await res.json()
+        if (dataaa.status == 400) {
+          console.log(dataaa);
+          setloading(false)
+          setTimeout(() => {
+            notify("Already signed up! Login now")
+            redirect('/login')
+          }, 5000);
+        } else {
+          notify("Completed! You can now login");
+        }
+      })
     }
     else {
-      if ((form.email != "") && (form.password != "")) {
-        setdata([...data, form]);
-        setform({ email: "", password: "", name: "", sername: "", number: "", address: "" });
-        let dataaa = await fetch('/api/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([...data, form]) });
-        console.log(dataaa);
-        notify("Completed! You can now login");
-      }
-      else {
-        notify("Enter email and password")
-      }
-      setloading(false)
+      notify("Enter email and password")
     }
+    setloading(false)
+    // }
 
     if (typeof window !== "undefined") {
       const inputs = document.querySelectorAll("input")
