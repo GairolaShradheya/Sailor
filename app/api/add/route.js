@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server"
 import { ObjectId } from "mongodb";
-import clientPromise from "@/app/lib/mongoConnect";
-import mongoose from "mongoose";
 import connectDB from "@/app/lib/connectDB";
 import document from "@/app/components/schema";
 
