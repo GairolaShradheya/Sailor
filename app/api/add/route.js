@@ -3,6 +3,8 @@ import { ObjectId } from "mongodb";
 import connectDB from "@/app/lib/connectDB";
 import document from "@/app/components/schema";
 
+let isConnected = false;
+
 
 const dbName = 'SignUp';
 
@@ -15,8 +17,11 @@ export async function GET() {
 }
 
 export async function POST(request) {
-  await connectDB();
-  let data = await request.json();
+  if (!isConnected) {
+    await connectDB();
+    isConnected = true;
+  }
+  let [data] = await request.json();
   try {
     const result = await document.updateOne(
       { email: data.email },
