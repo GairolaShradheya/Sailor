@@ -23,15 +23,16 @@ export async function POST(request) {
   }
   let [data] = await request.json();
   try {
-    const result = await document.updateOne(
-      { email: data.email },
-      { $setOnInsert: data },
-      { upsert: true }
-    );
+    await document.create(data)
+    // const result = await document.updateOne(
+    //   { email: data.email },
+    //   { $setOnInsert: data },
+    //   { upsert: true }
+    // );
 
-    if (result.matchedCount > 0) {
-      return NextResponse.json({ message: "Email already exists", status: 400 });
-    }
+    // if (result.matchedCount > 0) {
+    //   return NextResponse.json({ message: "Email already exists", status: 400 });
+    // }
 
     return NextResponse.json({ message: "You can now login.", status: 200 });
 
