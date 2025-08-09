@@ -21,31 +21,28 @@ function Page() {
 
   const handleclick = async () => {
     setloading(true)
+    let dataa;
     if ((form.email != "") && (form.password != "")) {
       setdata([...data, form]);
       setform({ email: "", password: "", name: "", sername: "", number: "", address: "" });
       await fetch(
         '/api/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([...data, form]) }
       ).then(async (res) => {
-        let dataaa = await res.json()
-        if (dataaa.status == 400) {
-          console.log(dataaa);
-          setloading(false)
-          setTimeout(() => {
-            notify("Already signed up! Login now")
-            redirect('/login')
-          }, 5000);
-        } else {
-          notify("Completed! You can now login");
-        }
+        dataa = await res.json();
       })
+      notify(`${dataa.message}`);
+      if (dataa.status == 400) {
+        setloading(false)
+        setTimeout(() => {
+          redirect('/login')
+        }, 1000);
+      }
     }
     else {
       notify("Enter email and password")
     }
-    setloading(false)
-    // }
 
+    setloading(false)
     if (typeof window !== "undefined") {
       const inputs = document.querySelectorAll("input")
       for (const item of inputs) {
@@ -66,7 +63,7 @@ function Page() {
             <input onChange={(e) => { handlechange(e) }} required className='z-50 md:w-[30vw] h-[6vh] rounded-xl px-10 py-5 text-black' type="number" name="number" placeholder='Enter your mobile no.' />
             <input onChange={(e) => { handlechange(e) }} required className='z-50 md:w-[30vw] h-[6vh] rounded-xl px-10 py-5 text-black' type="email" name="email" placeholder='Enter your email' />
             <input onChange={(e) => { handlechange(e) }} required className='z-50 md:w-[30vw] h-[6vh] rounded-xl px-10 py-5 text-black' type="text" name="address" placeholder='Enter your address' />
-            <input onChange={(e) => { handlechange(e) }} required className='z-50 md:w-[30vw] h-[6vh] rounded-xl px-10 py-5 text-black' type="password" name="password" placeholder='Enter your password' />
+            <input onKeyDown={(e) => { (e.key == "Enter") && handleclick() }} onChange={(e) => { handlechange(e) }} required className='z-50 md:w-[30vw] h-[6vh] rounded-xl px-10 py-5 text-black' type="password" name="password" placeholder='Enter your password' />
           </div>
         </div>
         <button onClick={() => { handleclick() }} className='z-50 border border-white px-4 py-2 rounded-full flex w-[100px] items-center bg-purple-700'><span className='mx-auto'>Sign Up</span></button>

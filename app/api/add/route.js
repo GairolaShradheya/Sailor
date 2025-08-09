@@ -13,16 +13,26 @@ export async function GET() {
   let data = await document.findOne({email}) || []
   return NextResponse.json(data)
 }
-0
+
 export async function POST(request) {
   await connectDB();
   let data = await request.json();
-  const exists = await document.findOne({ email: data[0].email });
-  if (exists) {
-    return NextResponse.json({ message: "Email already exists", status: 400 });
+  try {
+    const result = await document.updateOne(
+      { email: data.email },
+      { $setOnInsert: data },
+      { upsert: true }
+    );
+
+    if (result.matchedCount > 0) {
+      return NextResponse.json({ message: "Email already exists", status: 400 });
+    }
+
+    return NextResponse.json({ message: "You can now login.", status: 200 });
+
+  } catch (error) {
+    return NextResponse.json({ message: "Something went wrong", error: error.message, status: 500 });
   }
-  let newUser = await document.create(data[0])
-  return NextResponse.json({ message: 'Hello World', status: 200 })
 }
 
 export async function PUT(request) {
