@@ -26,7 +26,7 @@ function Page() {
       setdata([...data, form]);
       setform({ email: "", password: "", name: "", sername: "", number: "", address: "" });
       await fetch(
-        '/api/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify([...data, form]) }
+        '/api/add', { method: 'POST', body: JSON.stringify([...data, form]) }
       ).then(async (res) => {
         dataa = await res.json();
       })

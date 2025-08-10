@@ -12,34 +12,28 @@ export async function GET() {
   const { searchParams } = new URL(request.url);
   const email = searchParams.get("email");
   await connectDB();
-  let data = await document.findOne({email}) || []
+  let data = await document.findOne({ email }) || []
   return NextResponse.json(data)
 }
 
 export async function POST(request) {
-  if (!isConnected) {
-    await connectDB();
-    isConnected = true;
-  }
   let [data] = await request.json();
-  try {
-    await document.create(data)
-    // const result = await document.updateOne(
-    //   { email: data.email },
-    //   { $setOnInsert: data },
-    //   { upsert: true }
-    // );
 
-    // if (result.matchedCount > 0) {
-    //   return NextResponse.json({ message: "Email already exists", status: 400 });
-    // }
+  // Connect in the background
+  connectDB()
+    .then(() => {
+      return document.updateOne(
+        { email: data.email },
+        { $setOnInsert: data },
+        { upsert: true }
+      );
+    })
+    .catch(err => console.error("DB insert error:", err));
 
-    return NextResponse.json({ message: "You can now login.", status: 200 });
-
-  } catch (error) {
-    return NextResponse.json({ message: "Something went wrong", error: error.message, status: 500 });
-  }
+  // Respond immediately
+  return NextResponse.json({ message: "We got your request, processing...", status: 202 });
 }
+
 
 export async function PUT(request) {
   await connectDB();
