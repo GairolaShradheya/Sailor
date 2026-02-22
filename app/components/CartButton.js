@@ -20,9 +20,9 @@ function CartButton({ product }) {
     }, [session])
     
 
-    useEffect(() => {
-        get_data()
-    }, [session])
+    //useEffect(() => {
+    //    get_data()
+    //}, [session])
 
 
     const handleCartClick = async () => {
